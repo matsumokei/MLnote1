@@ -1,0 +1,133 @@
+\subsection{誤差逆伝播法}
+上で述べたニューラルネットワークの最後の$L$層目の出力を具体的に見ると，
+\begin{align}
+    \vec{y} &= \sigma(\vec{z})^{L}\\[10pt]
+    &=\sigma(
+        \hat{W}^{(L)}
+        \sigma(
+            \hat{W}^{(L-1)}
+            \sigma(
+                \cdots
+                \sigma(
+                    \hat{W}^{(l+1)}
+                    \sigma(
+                        \textcolor{red}{\hat{W}^{(l)}}
+                        \sigma(
+                            \cdots
+                        )
+                    )
+                )
+            )
+        )
+    )
+\end{align}
+と多重合成関数となっていることがわかる．つまり，層が深くなればなるほど，巨大な合成関数を計算し，その微分を計算する必要がある．そこで，$E$のパラメータ微分を効率よく計算することが誤差逆伝搬法の目的である．
+
+ニューラルネットワークにおいて$l$層目の$j$番目のユニットについて考える．まず，次のデルタを導入する：
+\begin{equation}
+    \delta_{j}^{l} \equiv 
+    \frac{\partial E}{\partial z^{l}_{j}}
+\end{equation}
+これは，$l$層目における$j$番目の誤差を表す．$\vec{z}^{(l)}$の定義は
+\begin{equation}
+    \vec{z}^{(l)}
+    =\hat{W}^{(l)} \vec{a}^{(l-1)} + \vec{b}^{(l)}
+\end{equation}
+\begin{equation}
+    z^{(l)}_{j}
+    =\sum_{k}w^{(l)}_{j,k} a^{(l-1)}_{k} + b^{(l)}_{j}
+\end{equation}
+であったから，パラメータ$\hat{W}$,$\vec{b}$に関する微分はそれぞれ，
+\begin{align}
+    \frac{\partial E}{\partial b^{l}_{j}}
+    &=\sum_{k}\frac{\partial z^{l}_k}{\partial b^{l}_{j}}
+    \frac{\partial E}{\partial z^{l}_{k}}\nn[10pt]
+    &=\sum_{k}\delta_{k,j}
+    \frac{\partial E}{\partial z^{l}_{k}}
+    =\frac{\partial E}{\partial z^{l}_{j}}=\delta^{l}_j,
+\end{align}
+
+\begin{align}
+    \frac{\partial E}{\partial w^{l}_{i,j}}
+    &=\sum_{k}\frac{\partial z^{l}_k}{\partial w^{l}_{i,j}}
+    \frac{\partial E}{\partial z^{l}_{k}}\nn[10pt]
+    &=\sum_{k}\frac{\partial E}{\partial z^{l}_{k}}
+    \delta_{k,i} a^{l-1}_{j}
+    =\frac{\partial E}{\partial z^{l}_{i}} a^{l-1}_{j}
+    =\delta^{l}_{i}a^{l-1}_{j}
+\end{align}
+となる．ここで，
+\begin{equation}
+    z^{l}_{k} = \sum_{s}w^{(l)}_{k,s} a^{(l-1)}_{s} + b^{(l)}_{k}
+\end{equation}
+であるので，
+\begin{equation}
+    \frac{\partial z^{l}_k}{\partial w^{l}_{i,j}}
+    = \sum_{s}\frac{\partial w^{l}_{k,s}}{\partial w^{l}_{i,j}}
+    a^{(l-1)}_{s}
+    =\frac{\partial w^{l}_{k,j}}{\partial w^{l}_{i,j}}
+    a^{(l-1)}_{j}
+    =\delta_{k,i}a^{l-1}_{j}
+\end{equation}
+が成り立つからこれを用いた．つまり，デルタ$\delta^{l}_{j}$を計算することができれば，パラメータ微分を実行できる．ここで，$a^{l-1}_{j}$は順伝播ですでに計算し保存している値を使えば良い．
+
+
+まず，$L$層目のデルタ$\delta^{L}_j$について計算を行う．
+\begin{align}
+    \delta^{L}_{j}
+    =\frac{\partial E}{\partial z^{L}_{j}}
+    =\sum_{k}\frac{\partial a^{L}_{k}}{\partial z^{L}_{j}}
+    \frac{\partial E}{\partial a^{L}_{k}}
+\end{align}
+ここで，$\vec{a}^{L}=\sigma(\vec{z}^{L})$であるから，
+\begin{align}
+    \delta^{L}_{j}
+    &=\sum_{k}\delta_{k,j}\frac{\partial a^{L}_{k}}{\partial z^{L}_{j}}
+    \frac{\partial E}{\partial a^{L}_{k}}\nn[10pt]
+    &=\frac{\partial a^{L}_{j}}{\partial z^{L}_{j}}
+    \frac{\partial E}{\partial a^{L}_{k}}
+    =\frac{\partial \sigma(z^{L}_{j})}{\partial z^{L}_{j}}
+    \frac{\partial E}{\partial a^{L}_{k}}
+    =\frac{\partial E}{\partial a^{L}_{k}}\sigma^{\prime}(z_j^{L})
+\end{align}
+と計算できる．関数$\sigma(\cdot)$の微分は解析的に実行可能である．次に，$l$層目でのデルタ$\delta^{l}_{j}$を求める．
+\begin{align}
+    \delta^{l}_{j}
+    =\frac{\partial E}{\partial z^{l}_{j}}
+    =\sum_{k}\frac{\partial z^{l+1}_{k}}{\partial z^{l}_{j}}
+    \frac{\partial E}{\partial z^{l+1}_{k}}
+    =\sum_{k}\frac{\partial z^{l+1}_{k}}{\partial z^{l}_{j}}
+    \delta^{l+1}_k
+\end{align}
+となる．さらに，
+\begin{equation}
+    \vec{z}^{(l)}
+    =\hat{W}^{(l)} \vec{a}^{(l-1)} + \vec{b}^{(l)}
+    =\hat{W}^{(l)} \sigma(\vec{z}^{\ l-1}) + \vec{b}^{(l)}
+\end{equation}
+を使えば，
+\begin{equation}
+    \frac{\partial z^{l+1}_{k}}{\partial z^{l}_{j}}
+    =w^{l+1}_{k,j}\sigma^{\prime}(z_j^{l})
+\end{equation}
+となり，
+\begin{align}
+    \delta^{l}_{j}
+    &=\sum_{k}w^{l+1}_{k,j}\sigma^{\prime}(z_j^{l})
+    \delta^{l+1}_k\nn[10pt]
+    &=\sigma^{\prime}(z_j^{l})\sum_{k}w^{l+1}_{k,j}
+    \delta^{l+1}_k
+\end{align}
+を得る．この式から，$l+1$層目のデルタを計算すれば，$l$層目のデルタを計算できることがわかる．ここで，Eq.~\eqref{}の計算は次のように計算できる：
+\begin{equation}
+    z^{l+1}_{k} = \sum_{s}w^{(l+1)}_{k,s} a^{(l)}_{s} + b^{(l+1)}_{k}
+\end{equation}
+であるので，
+\begin{equation}
+    \frac{\partial z^{l+1}_k}{\partial z^{l}_{j}}
+    = \sum_{s}w^{(l+1)}_{k,s} 
+    \frac{\partial a^{(l)}_{s}}{\partial z^{l}_{j}}
+    = \sum_{s}w^{(l+1)}_{k,s} 
+    \frac{\partial \sigma(z^{(l)}_{s})}{\partial z^{l}_{j}}
+    =w^{l+1}_{k,j}\sigma^{\prime}(z^{l}_j)
+\end{equation}

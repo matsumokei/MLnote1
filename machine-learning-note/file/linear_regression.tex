@@ -1,0 +1,118 @@
+\part{機械学習入門}
+\section*{Day1}
+\section{線形回帰モデル}
+機械学習手法のうち最も基本的なモデルである線形回帰モデルについて述べる．
+
+\subsection{線形回帰モデル}
+線形回帰とは，入力$\vec{x}$と出力$y$の間に線形的な関係があると仮定し，訓練データ集合$\mathcal{D}=\{(\vec{x}_1,y_1),\ (\vec{x}_2,y_2),\ (\vec{x}_N,y_N)\}$から，線形モデル
+\begin{equation}
+    y_i = \vec{w}^{t}\vec{x}_i
+    =w_1(\vec{x}_i)_{1}+w_2(\vec{x}_i)_{2}+\cdots+w_d(\vec{x}_i)_{d}
+\end{equation}
+の未知パラメータ$\vec{w}$を推定し，未知入力に対する予測を行うモデルである．ここで，入力$\vec{x}$は$d$次元ベクトル，出力はスカラーである．式中の表記$(\vec{x}_i)_{j}$は，訓練データ集合$i$番目の入力ベクトルの$j$番目の要素である．これは出力$y_i$を基底$x$で展開し，その展開係数を推定することが目的であるとも言える．
+
+
+\subsection{特徴量を入れた線形回帰モデル}
+入力として，直接訓練集合の入力ベクトル$\vec{x}$を入力するのではなく，入力ベクトル$\vec{x}$を特徴量ベクトル$\vec{\phi}(\vec{x})$へ変換し，特徴量ベクトルに対する線形モデル
+\begin{equation}
+    y_i = \vec{w}^{t}\vec{\phi}(\vec{x}_i)
+\end{equation}
+を考えることで，非線形的な関係性を表現することができる．入力ベクトルが非線形変換されているが，パラメータ$\vec{w}$に対して，線形になっていれば，線形回帰モデルである．
+\paragraph{例1:}
+入力と出力がともにスカラーの場合を考えよう．入力$x$に対する出力$y$の関係を多項式によってフィッティングする場合を考える；
+\begin{equation}
+    y = \sum_{k=0}^{d} w_k x^{k}
+\end{equation}
+ここで，$x^{k}$は$x$の$k$乗を表し，$x^0=1$, $w_0=b$である．これは，入力が1次元であったが特徴量ベクトルに変換されたことで，次元が$d$に増えていることに注意せよ．このとき特徴量ベクトルは次のようにかける：
+\begin{equation}
+     \vec{\phi}(x)=\left(
+        \begin{array}{c}
+       1\\[10pt]
+       \phi_1(x)\\[10pt]
+       \phi_2(x)\\[10pt]
+       \vdots\\[10pt]
+       \phi_d(x)
+        \end{array}
+        \right)
+        =\left(
+        \begin{array}{c}
+       1\\[10pt]
+       x^1\\[10pt]
+       x^2\\[10pt]
+       \vdots\\[10pt]
+       x^d
+        \end{array}
+        \right)
+\end{equation}
+
+訓練データの入力，出力ベクトルの次元がともに$d$次元のときを考える．このとき，入力ベクトルと出力ベクトルはそれぞれ$\vec{x}=(x_1\ x_2\ x_3\ \cdots x_d)$, $\vec{y}=(y_1\ y_2\ y_3\ \cdots y_d)$である．このとき，特徴量ベクトルへの変換は，
+\begin{align}
+    \vec{y}^{\ t}
+    &=\vec{w}^{\ t}\hat{\phi}
+    =\vec{w}^{\ t} (\vec{\phi}(x_1)\ \vec{\phi}(x_2)\ \cdots\ \vec{\phi}(x_d))\nn[10pt]
+    &=(w_1\ w_2\ \cdots\ w_d)
+    \left(
+        \begin{array}{cccc}
+       \phi_0(x_1)&\phi_0(x_2)&\cdots&\phi_0(x_d)\\[10pt]
+       \phi_1(x_1)&\phi_1(x_2)&\cdots&\phi_1(x_d)\\[10pt]
+       \phi_2(x_1)&\phi_2(x_2)&\cdots&\phi_2(x_d)\\[10pt]
+       \vdots&\vdots&\ddots&\vdots\\[10pt]
+       \phi_n(x_1)&\phi_n(x_2)&\cdots&\phi_n(x_d)
+        \end{array}
+    \right)
+\end{align}
+
+\subsection{多次元の線形回帰モデル}
+高次元の線形回帰モデル
+\begin{equation}
+    \vec{y}_i={}^t\vec{w}\vec{x}_i
+\end{equation}
+を考える．このモデルに対して，訓練データ集合$\mathcal{D}=\{(\vec{x}_1,\vec{y}_1),(\vec{x}_2,\vec{y}_2),\cdots,(\vec{x}_N,\vec{y}_N)\}$が与えられたとき，予測誤差の二乗和
+\begin{equation}
+    L(\vec{w}) = \sum_{i=1}^{N}\|\vec{y}_i-{}^t\vec{w}\vec{x}_i\|^2
+\end{equation}
+を損失関数として，損失関数が最小となるようなパラメータ$\vec{w}^{\ast}$を求めれば良い．これは数式で書けば
+\begin{equation}
+    \vec{w}^{\ast} = \mathop{\arg\min}_{\vec{w}} L(\vec{w})
+\end{equation}
+である．最小二乗法による最適パラメータ$\vec{w}^{\ast}$は，訓練データ集合から行列
+\begin{align}
+    \hat{X}
+    &
+    =\left(
+        \begin{array}{c}
+       {}^t\vec{x}_1\\[5pt]
+       {}^t\vec{x}_2\\[5pt]
+       {}^t\vec{x}_3\\[5pt]
+       \vdots\\[5pt]
+       {}^t\vec{x}_N
+        \end{array}
+    \right)
+    =
+    \left(
+        \begin{array}{cccc}
+       (\vec{x}_1)_1&(\vec{x}_1)_2&\cdots&(\vec{x}_1)_d\\[10pt]
+       (\vec{x}_2)_1&(\vec{x}_2)_2&\cdots&(\vec{x}_2)_d\\[10pt]
+       (\vec{x}_3)_1&(\vec{x}_3)_2&\cdots&(\vec{x}_3)_d\\[10pt]
+       \vdots&\vdots&\ddots&\vdots\\[10pt]
+       (\vec{x}_N)_1&(\vec{x}_N)_2&\cdots&(\vec{x}_N)_d\\[10pt]
+        \end{array}
+    \right),\ \ \ 
+    \vec{y}
+    &
+    =\left(
+        \begin{array}{c}
+       {y}_1\\[5pt]
+       {y}_2\\[5pt]
+       {y}_3\\[5pt]
+       \vdots\\[5pt]
+       {y}_N
+        \end{array}
+    \right)
+\end{align}
+を構成したとき，方程式
+\begin{equation}
+    {}^t\hat{X}\hat{X}\vec{w}^\ast = {}^t\hat{X}\vec{y}
+\end{equation}
+を満たす．この方程式を正規方程式という．この方程式は${}^t\hat{X}\hat{X}$が正規行列，つまり逆行列が存在すれば$\vec{w}^\ast = ({}^t\hat{X}\hat{X})^{-1}\ {}^t\hat{X}\vec{y}$と解ける．正規方程式の導出を次に示す．
+\subsection{具体的な実装・結果}

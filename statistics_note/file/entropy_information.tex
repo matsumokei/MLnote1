@@ -1,0 +1,304 @@
+\section{information theoretic entropy}
+\subsection{Shannon entropy}
+系が離散的な状態$j=1,\ldots,\Omega$であるとする．このとき，確率分布$\bp=(p_j)_{j=1,\ldots,\Omega}$のShannon entropyは以下で定義される：
+\begin{kotak}
+	\begin{definition}[Shannon entropy]
+	オラクル関数から定まる選択的回転変換$R_f$を任意の$x,y=0,1,\ldots,N-1$に対して
+	\be
+	S(\bp)\equiv-\sum_{j=1}^{\Omega}p_j\log{p_j}
+	\ee
+	ここで，$0\log0=0$と定義する．
+	\end{definition}
+\end{kotak}
+確率分布が一様分布
+\begin{equation}
+    \bp_u= \left(
+        \begin{array}{c}
+        p_1 \\
+        p_2 \\
+        \vdots \\
+        p_\Omega
+        \end{array}
+        \right)
+        =(p_j)_{j=1,\ldots,\Omega}
+\end{equation}
+Shannon entopyは
+\begin{equation}
+    S(\bp_{u})=-\sum_{j=1}^{\Omega}(1/\Omega)\log{(1/\Omega)}
+    =\log{\Omega}
+\end{equation}
+となる．そして，一般的にShannon entropy
+\begin{equation}
+    0\leq S(\bp)\leq\log{\Omega}
+\end{equation}
+を満たす．\\
+情報量$I_j$は
+\begin{equation}
+    I_j=\log{1/p_j}
+\end{equation}
+と書ける．情報量は，$j$を観測したときの，びっくり度合いを表す量であるといえる．Shannon entropyの定義式から，$S(\bp)$は情報量$I_j$の平均であることがわかる．例えば$j$を観測する確率が$p_j=1$のとき，情報量は
+\begin{equation}
+    I_j=\log{(1/p_j)}=0
+\end{equation}
+となる．$j$が起こると知っているので，驚きがないことを意味する．次に，$p_j=1/10^{100}$のとき，情報量は
+\begin{equation}
+    I_j=100\log{10}
+\end{equation}
+となる．これは，めったに起きないイベントなため，極めて大きな驚きを表すといえる．\\
+次に，Shannon entropyの相加性についてみる．系1の確率を$p^{(1)}_j$，系2の確率を$p^{(2)}_k$とし，それぞれ独立とする．この2つの系の複合系を考える．すると，全系の確率は$p_{j,k}p^{(1)}_jp^{(2)}_k$と書ける．全系のShannon entropyは
+\begin{align}
+    S(\bp)&=-\sum_{j,k}p_{j,k}\log{p_{j,k}}
+    =-\sum_j\left(\sum_kp_{j,k}\right)\log{p^{(1)}_j}
+    -\sum_k\left(\sum_jp_{j,k}\right)\log{p^{(2)}_k}\nn[10pt]
+    &-\sum_jp^{(1)}_j\log{p^{(1)}_j}
+    -\sum_kp^{(2)}_k\log{p^{(2)}_k}\nn[10pt]
+    &=S(\bp^{(1)})+S(\bp^{(2)})
+\end{align}
+となり，確かにShannon entropyは相加性を持っていることがわかる．
+
+\subsection{example：2値エントロピー（binary entropy）}
+次に重要な例として，2値エントロピーを見る．$\Omega=2$の場合を考え，そのときの確率分布を
+\begin{equation}
+    \bp_u= \left(
+        \begin{array}{c}
+        p \\[5pt]
+        1-p 
+        \end{array}
+        \right)
+\end{equation}
+とすると，Shannon entropyは
+\begin{equation}
+    S_2(p)\equiv S(\bp)
+    =-p\log{p}-(1-p)\log{(1-p)}
+\end{equation}
+となる．この導関数
+\begin{align}
+    S_2^{\prime}(p)=log{\frac{1-p}{p}\\[10pt]
+    S_2^{\prime\prime}(p)=-\frac{1}{p(1-p)}\\[10pt]
+\end{align}
+となり，図\ref{}のようになる．さて，エントロピーとは情報量（驚きの量）であった．$p=1/2$のとき，最大値となり，$p=0,1$のとき，ゼロになる．
+
+\subsection{統計力学的エントロピーとのつながり}
+カノニカル分布
+\begin{equation}
+    p^{(can,\beta)}_j=\frac{e^{-\beta E_j}}{Z(\beta)}
+\end{equation}
+を考える．このとき，Shannon entropyは
+\begin{align}
+    S(\bp^{(can,\beta)})
+    &=-\sum_{j=1}^{\Omega}p^{(can,\beta)}_j\log{\frac{e^{\beta E_j}}{Z(\beta)}}\nn[10pt]
+    &=\sum_{j=1}^{\Omega}p^{(can,\beta)}_j
+    \{\beta E_j+\log{Z(\beta)}\}
+    =\beta\braket{\hH}^{can}_{\beta}+\log{Z(\beta)}\nn[10pt]
+    &=\beta\{\braket{\hH}^{can}_{\beta}-F(\beta)\}
+    =\frac{1}{T}\{\braket{\hH}^{can}_{\beta}-F(\beta)\}
+    =S(\beta)
+\end{align}
+となる．温度一定の環境下には内部エネルギーと（使うことのできる量）自由エネルギー
+
+
+\section{相対エントロピーとK-Lダイバージェンス（relative entropy KL divergence）}
+\begin{kotak}
+	\begin{definition}[relative entropy KL divergence]
+	$\bp$，$\bq$を確率分布とする．このとき，相対エントロピー，または，K-Lダイバージェンスは
+	\be
+	D(\bp|\bq)\equiv\sum_{j=1}^{\Omega}p_j\log{\frac{p_j}{q_j}}
+	\ee
+	で定義される．このとき，もし，少なくとも１つの$j$に対して，$p_j\neq0$かつ$q_j=0$ならば，$D(\bp|\bq)=\infty$が成り立つ．
+	\end{definition}
+\end{kotak}
+KLダイバージェンスは以下の性質をもつ．
+\paragraph{basic property}
+非負性
+\begin{equation}
+    D(\bp|\bq)\geq0
+\end{equation}
+等号成立条件
+\begin{equation}
+    D(\bp|\bq)=0\iff \bp=\bq
+\end{equation}
+これらの証明を行う
+\begin{equation}
+    \log{x}\leq x-1,\ \ {\rm{for}}\ x>0
+\end{equation}
+が成り立つことを思い出す．このことから，
+\begin{equation}
+    \log{\frac{1}{x}}\geq1-x,\ \ ( \log{\frac{1}{x}}>1-x,\ \rm{if}\ x\neq1)
+\end{equation}
+が成り立つ．このことから，
+\begin{align}
+    D(\bp|\bq)&=\sum_{j=1}^{\Omega}p_j\log{\frac{1}{q_j/p_j}}\geq \sum_{j=1}^{\Omega}p_j\left\{1-\frac{q_j}{p_j}\right\}=\sum_jp_j-\sum_jq_j=1-1=0
+\end{align}
+$D(\bp|\bq)$は確率分布$\bp$と$\bq$の間の非対称な距離のことであるといえる．また$D$は$\bq$を基準にしたとき，$\bp$がどれくらい違うか（遠いか）を測っているといえる．例として，一様分布
+\begin{equation}
+    \bp_u= \left(
+        \begin{array}{c}
+        p_1 \\
+        p_2 \\
+        \vdots \\
+        p_\Omega
+        \end{array}
+        \right)
+        =(p_j)_{j=1,\ldots,\Omega}
+\end{equation}
+を基準にKLダイバージェンスを見てみる．$\bq=\bp_u$とすると，
+\begin{align}
+    D(\bp|\bp_u)=\sum_j p_j(\log{p_j}+\log{\Omega})=\log{\Omega}-S(\bp)
+\end{align}
+が成り立つ．このことから，Shannon entropyというのは，KLダイバージェンスにおいて，基準を一様分布にしたもの
+であるといえる．KLダイバージェンスの非負性から
+\begin{equation}
+    \log{\Omega}\geq S(\bp)
+\end{equation}
+であることがわかる．
+
+
+
+
+
+\subsection{KLダイバージェンスの単調性(monotonicity of KL-divergence)}
+$\bp$と$\bq$を任意の確率分布とし，$T$を任意の確率行列とする．このとき，
+\begin{equation}
+    D(\bp|\bq)\geq D(T\bp|T\bq)
+\end{equation}
+が成り立つ．つまり，確率分布を時間発展させていくとKL-ダイバージェンスは元のものよりも小さくなることがわかる．\\
+証明\\
+
+
+
+
+
+\section{情報量の推定値ー対数尤度}
+真の分布がわかっている場合，相対エントロピー（K-L情報量）によって，モデルが良いか，悪いかを判断できた．しかし，通常は，真の分布は未知であり，真の分布から得られたデータのみが与えられている場合が多い．ここでは，真の分布が未知のときに，どのようにしてこの真の分布を近似するモデルの優劣を比較するかを考える．真の分布$\bp=\{p_1,p_2,\cdots,p_m\}$にしたがって得られた$n$個の観測値$\{x_1,x_2,\ldots,x_n\}$が与えられているとする．各観測値$x_i$は事象$\omega_1,\cdots.\omega_m$のうちどれかひとつを取りうる．各事象$\omega_i$の起きた回数を$n_i$と表すことにすると，$n_1+n_1+\cdots+n_m=n$が成り立つ．ここで，このデータに基づいて，モデル$\bq$に関する相対エントロピーをデータから推定することを考えてみる．K-L情報量は定義から，
+\begin{equation}
+    D(\bp|\bq)\equiv\sum_{j=1}^{m}p_j\log{\frac{p_j}{q_j}}
+    =\sum_{j=1}^{m}p_i\log{p_i}-\sum_{j=1}^{m}p_j\log{q_i}
+\end{equation}
+と書き換えることができる．右辺初項は，真の分布$\bp$のみに依存した定数である．したがって，右辺債2項が大きいほどK-L情報量$D(\bp|\bq)$は小さくなることがわかる．つまり，K-L情報量の大小を比較するためには，$\sum_{j=1}^{m}p_j\log{q_i}$の値だけが推定できればよい．
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{}
+エントロピー古典的なエントロピーシャノンエントロピー
+
+<h3>
+<span id="定義" class="fragment"></span><a href="#%E5%AE%9A%E7%BE%A9"><i class="fa fa-link"></i></a>定義</h3>
+
+　生起確率が$p \space (0 \leq p \leq 1)$である事象Aがあったとします。その事象が実際に生起したときに得られる情報量は、どのように定義されるべきでしょうか？情報の量というからには正の値になっていてほしいです。また、確率が小さい事象が生起したときの方が情報量（＝びっくり度＝インパクト＝得られる知識量）が大きい感覚がありますので、情報量はpについて単調減少とするのが良いです。さらに、２つの事象が同時に発生する確率は両者の積になりますが、そのときに得られる情報量は、各事象が生起したときに得られる情報量の和とする（加法性の要請）のが自然な感覚です<sup id="fnref1"><a href="#fn1" title="もしかすると、ここで「ん？」と思われるかもしれませんが、さらっと流してください。こう考えると万事うまく行くのです。">1</a></sup>。　
+
+　ということを考え合わせ、なるべく簡単な関数形にしたいとすると、情報量を　
+
+-\log p  \tag{1}
+ \end{equation}
+
+　のように定義するのが良い、ということがわかります<sup id="fnref2"><a href="#fn2" title="情報理論の習慣に従い、$log$の底は2とし、自然対数(底がe)は$\ln$と書くことにします。">2</a></sup>。　
+
+　情報量を別の言い方で規定することもできます。その事象が生起する前に立ち返ってみると、情報量とは「不確実さの度合い」を表していると言っても良いです。その事象が生起することによって、有限だった不確実さがゼロになり、その分、ゼロだった情報量が有限の値になるという見方です。つまり、「ある事象が生起する前の不確実さの度合い」＝「ある事象が生起したときに得られる情報量」という考え方ですね。　
+
+　古典的なエントロピー（シャノン・エントロピーとも呼ばれますが、本記事ではいちいち面倒なので、以後、単にエントロピーと呼ぶことにします）というのは、事象が生起する前の「不確実さの度合い」の平均値（期待値）として定義されます。すなわち、いま、$n$個の事象$\{ A_1,\cdots,A_n\}$があり、その各々の生起確率が$\{ p_1, \cdots , p_n\}$だったとすると、この状況におけるエントロピーは、　
+
+ \begin{equation}H(A) \equiv H(p_1, \cdots, p_n) \equiv -\sum_{i=1}^{n} p_i \log p_i  \tag{2}
+ \end{equation}
+
+　と定義されます<sup id="fnref3"><a href="#fn3" title="ここで確率pが0の場合もあり得るので、その場合$p \log p = 0 \log 0 = 0$であると約束しておきます。">3</a></sup>。ここで、　
+
+ \begin{equation}\sum_{i=1}^{n} p_i =1  \tag{3}
+ \end{equation}
+
+　です。　
+
+　もう少し説明を加えると、エントロピーというのは、起こり得る事象の系列と各確率がわかっているときに、その状況において定義される指標です。例えば、東京の天気が「晴れ、曇、雨、雪」になるという事象系列があり、各々の確率が「1/2,1/4,1/8,1/8」で与えられたという状況のもとで一意に決まる値です。もし各確率が別の値「1/4,1/4,1/4,1/4」だったとすると、エントロピーは別の値になります。この例の場合、前者と後者を比べると不確実さはどちらが大きいでしょうか？前者の場合、だいたい晴れで、そうでなければ曇りかなーと思っておけば良いのに対し、後者の場合、生起確率が全事象で均一になっているので、どんな天気になるかは全く不明確です。という意味で、不確実さは後者の方が大きいと言えます（つまり、後者の方がエントロピーが大きいです。式(3)に代入して計算してもわかりますが）。そんな感覚を定量化するものであると理解しておけば良いと思います。　
+
+　さらにもう少し説明を加えると、上の例では東京の天気しか考えていませんでしたが、当然別の状況もあり得ます。例えば、大阪の天気が「晴れ、曇、雨、雪」になる可能性と各確率がわかっているという状況とか、あるいは、天気ではなく、いまここにあるサイコロを振ったときの目が「１から６のいずれか」になる可能性と各確率がわかっているといった状況も考えられます。その各々についてエントロピーが定義できます。そのような複数の事象系列の可能性があったときに、それを結合した複合事象についてのエントロピー（結合エントロピー）や、ある事象が生起したことがわかったときに得られるエントロピー（条件付きエントロピー）等々の指標も考えることができます。これらも情報理論的に重要な概念ですが、その話は次節以降で説明することにします。　
+
+　その前に、まず、エントロピーの定義からわかる、いくつかの重要な性質についておさえておきます。　
+
+<h3>
+<span id="性質" class="fragment"></span><a href="#%E6%80%A7%E8%B3%AA"><i class="fa fa-link"></i></a>性質</h3>
+
+　エントロピーには、以下の性質があります。　
+
+<ul>
+<li>(1) エントロピーの最小値は0（非負）</li>
+<li>(2) エントロピーの最大値はlog(n)</li>
+<li>(3) エントロピーは凹関数</li>
+</ul>
+
+　順に確認します。　
+
+<h4>
+<span id="1-エントロピーの最小値は0非負" class="fragment"></span><a href="#1-%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E3%81%AE%E6%9C%80%E5%B0%8F%E5%80%A4%E3%81%AF0%E9%9D%9E%E8%B2%A0"><i class="fa fa-link"></i></a>(1) エントロピーの最小値は0（非負）</h4>
+
+ \begin{equation}H = - \sum_{i=1}^{n} p_i \log p_i \geq 0  \tag{4}
+ \end{equation}
+
+　が成り立ちます。$-p_i \log p_i \geq 0$であることから明らかです。等号が成り立つのは、$p_i \log p_i$がすべて0になる場合です。$\sum_i p_i = 1$なので、$\{ p_i \}$のうちでどれか一つが1で、それ以外がすべて0という場合のみ、等号が成り立つことになります。つまり、どれか一つの事象が必ず生起する場合ですね。何が起きるか決まっているので不確実さはゼロ、すなわちエントロピーはゼロになります。　
+
+<h4>
+<span id="2-エントロピーの最大値はlogn" class="fragment"></span><a href="#2-%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E3%81%AE%E6%9C%80%E5%A4%A7%E5%80%A4%E3%81%AFlogn"><i class="fa fa-link"></i></a>(2) エントロピーの最大値はlog(n)</h4>
+
+ \begin{equation}H = - \sum_{i=1}^{n} p_i \log p_i \leq \log n  \tag{5}
+ \end{equation}
+
+　が成り立ちます。　
+
+　【証明】　
+
+　$\sum_{i=1}^{n} p_i = 1$という制約条件のもとで、式(5)を最大化したいので、ラグランジェの未定乗数法を使います。未定乗数を$\lambda$とし、関数、　
+
+ \begin{equation}f(p_1,\cdots,p_n,\lambda) = - \sum_{i=1}^{n} p_i \log p_i + \lambda (\sum_{i=1}^{n} p_{i} - 1) \tag{6}
+ \end{equation}
+
+　を最大化する変数の組$\{ p_i \}$を求めます。そのため、各変数で偏微分したものが0という条件で連立方程式を解きます<sup id="fnref4"><a href="#fn4" title="ラグランジェの未定乗数法では、通常、$\lambda$に関する微分がゼロという条件も使うのですが、それをやらないでも答えが出ることもあります。">4</a></sup>。　
+
+ \begin{equation}\frac{\partial}{\partial p_i} (- \sum_{i}^{n} p_i \log p_i + \lambda (\sum_{i}^{n} p_{i} - 1)) = -\log p_i - \log e +\lambda = 0  \tag{7}
+ \end{equation}
+
+　となります。ここで、　
+
+ \begin{equation}\log p = \log e \cdot \ln p  \tag{8}
+ \end{equation}
+
+　を使いました。式(7)より、　
+
+\begin{align}
+\log p_i & = - \log e + \lambda \\
+p_i & = \frac{2^{\lambda}}{e}  \tag{9}
+\end{align}
+
+
+　となり、$p_i$は$i$に依存しない一定値になることがわかります。$\sum_{i=1}^{n} p_i = 1$なので、$p_i = \frac{1}{n}$となり、エントロピーは、　
+
+ \begin{equation}H = n \times \frac{1}{n} (-\log \frac{1}{n}) = \log n  \tag{10}
+ \end{equation}
+
+　となります。すべての確率が同じ値、つまり、生起確率に偏りが全くない場合、エントロピーは最大値になります。（証明終）　
+
+　ここで、大事なことを付け加えておきます。それは、「エントロピーはビット数に等しい」ということです。いま、ある事象が確率的に連続して発生するような情報源があったとします。先程は天気の例を出しましたが、今の場合、あまり良い例ではないので、別の例にします。ちょっと抽象的になりますが、{a,b,c,d}という文字が何らかの出現確率で発生する情報源をイメージしてください。これを、デジタル信号にして（つまりビット化して）、ある受信者に間違いなく送信したいとします。さて、何ビット必要でしょうか？という問題を考えます。送信すべき文字が4つとも均等確率で発生するのであれば、容易にわかる通り、2ビット必要ですね。頭の中で$\log 4$を計算したと思います（多分）。文字が256種類あって均等確率で発生するなら、必要なビット数は8ビットですね（$\log 256$）。つまり、これは何を計算しているかというと、均等確率の場合のエントロピーを計算していることに相当します。では、出現確率が均等でなかった場合、どうでしょうか。4文字の例の場合で言うと、例えば、aとbの出願確率がとても高く、cやdは滅多に出現しない場合、ビット数は2ビットも必要ないです。極端な話、aとbしか出現しない場合は、1ビットでいけますね。これは、何を計算しているかというと、まさに出現確率が偏っている場合のエントロピーを計算していることになります。つまり、出現確率に応じてそのエントロピーを計算すれば、それが送信に最低限必要なビット数になるということです<sup id="fnref5"><a href="#fn5" title="具体的にどんなビット割当をして符号化（＝データ圧縮）すればもっとも効率が良いのかという話題に踏み込むと、本記事がそれで終わってしまうので、感覚的な説明でとりあえずご勘弁ください。">5</a></sup>。出現確率がわからない場合は、エントロピーの最大値である$\log n$に相当するビット数を用意しておけば十分です。　
+
+<h4>
+<span id="3-エントロピーは凹関数" class="fragment"></span><a href="#3-%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E3%81%AF%E5%87%B9%E9%96%A2%E6%95%B0"><i class="fa fa-link"></i></a>(3) エントロピーは凹関数</h4>
+
+　確率変数$\{ p_1, \cdots , p_n \}$をn次元ベクトル$p = (p_1, \cdots , p_n)$と見立てると、エントロピー、　
+
+ \begin{equation}H(p) = H(p_1, \cdots , p_n) \tag{11}
+ \end{equation}
+
+　は、n次元ベクトルを変数とするスカラー関数とみなすことができます。としたときに、この関数（エントロピー）は、凹関数です。すなわち、任意の実数$x \space (0 \leq x \leq 1)$に対して、　
+
+ \begin{equation}H(xp + (1-x)q) \geq x H(p) + (1-x) H(q)  \tag{12}
+ \end{equation}
+
+　が成り立ちます<sup id="fnref6"><a href="#fn6" title="下に凸な関数が凸関数で、下に凹（つまり上に凸）な関数が凹関数です。">6</a></sup>。ここで、$p,q$は確率変数を表すn次元ベクトルです。　

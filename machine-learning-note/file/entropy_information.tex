@@ -1,0 +1,193 @@
+\section{information theoretic entropy}
+\subsection{Shannon entropy}
+系が離散的な状態$j=1,\ldots,\Omega$であるとする．このとき，確率分布$\bm{p}=(p_j)_{j=1,\ldots,\Omega}$のShannon entropyは以下で定義される：
+\begin{kotak}
+	\begin{definition}[Shannon entropy]
+	オラクル関数から定まる選択的回転変換$R_f$を任意の$x,y=0,1,\ldots,N-1$に対して
+	\be
+	S(\bm{p})\equiv-\sum_{j=1}^{\Omega}p_j\log{p_j}
+	\ee
+	ここで，$0\log0=0$と定義する．
+	\end{definition}
+\end{kotak}
+確率分布が一様分布
+\begin{equation}
+    \bm{p}_u= \left(
+        \begin{array}{c}
+        p_1 \\
+        p_2 \\
+        \vdots \\
+        p_\Omega
+        \end{array}
+        \right)
+        =(p_j)_{j=1,\ldots,\Omega}
+\end{equation}
+Shannon entopyは
+\begin{equation}
+    S(\bm{p}_{u})=-\sum_{j=1}^{\Omega}(1/\Omega)\log{(1/\Omega)}
+    =\log{\Omega}
+\end{equation}
+となる．そして，一般的にShannon entropy
+\begin{equation}
+    0\leq S(\bm{p})\leq\log{\Omega}
+\end{equation}
+を満たす．\\
+情報量$I_j$は
+\begin{equation}
+    I_j=\log{1/p_j}
+\end{equation}
+と書ける．情報量は，$j$を観測したときの，びっくり度合いを表す量であるといえる．Shannon entropyの定義式から，$S(\bm{p})$は情報量$I_j$の平均であることがわかる．例えば$j$を観測する確率が$p_j=1$のとき，情報量は
+\begin{equation}
+    I_j=\log{(1/p_j)}=0
+\end{equation}
+となる．$j$が起こると知っているので，驚きがないことを意味する．次に，$p_j=1/10^{100}$のとき，情報量は
+\begin{equation}
+    I_j=100\log{10}
+\end{equation}
+となる．これは，めったに起きないイベントなため，極めて大きな驚きを表すといえる．\\
+次に，Shannon entropyの相加性についてみる．系1の確率を$p^{(1)}_j$，系2の確率を$p^{(2)}_k$とし，それぞれ独立とする．この2つの系の複合系を考える．すると，全系の確率は$p_{j,k}p^{(1)}_jp^{(2)}_k$と書ける．全系のShannon entropyは
+\begin{align}
+    S(\bm{p})&=-\sum_{j,k}p_{j,k}\log{p_{j,k}}
+    =-\sum_j\left(\sum_kp_{j,k}\right)\log{p^{(1)}_j}
+    -\sum_k\left(\sum_jp_{j,k}\right)\log{p^{(2)}_k}\nn[10pt]
+    &-\sum_jp^{(1)}_j\log{p^{(1)}_j}
+    -\sum_kp^{(2)}_k\log{p^{(2)}_k}\nn[10pt]
+    &=S(\bm{p}^{(1)})+S(\bm{p}^{(2)})
+\end{align}
+となり，確かにShannon entropyは相加性を持っていることがわかる．
+
+\subsection{example：2値エントロピー（binary entropy）}
+次に重要な例として，2値エントロピーを見る．$\Omega=2$の場合を考え，そのときの確率分布を
+\begin{equation}
+    \bm{p}_u= \left(
+        \begin{array}{c}
+        p \\[5pt]
+        1-p 
+        \end{array}
+        \right)
+\end{equation}
+とすると，Shannon entropyは
+\begin{equation}
+    S_2(p)\equiv S(\bm{p})
+    =-p\log{p}-(1-p)\log{(1-p)}
+\end{equation}
+となる．この導関数
+\begin{align}
+    S_2^{\prime}(p)=\log{\frac{1-p}{p}}\\[10pt]
+    S_2^{\prime\prime}(p)=-\frac{1}{p(1-p)}
+\end{align}
+となり，図\ref{}のようになる．さて，エントロピーとは情報量（驚きの量）であった．$p=1/2$のとき，最大値となり，$p=0,1$のとき，ゼロになる．
+
+\subsection{統計力学的エントロピーとのつながり}
+カノニカル分布
+\begin{equation}
+    p^{(can,\beta)}_j=\frac{e^{-\beta E_j}}{Z(\beta)}
+\end{equation}
+を考える．このとき，Shannon entropyは
+\begin{align}
+    S(\bm{p}^{(can,\beta)})
+    &=-\sum_{j=1}^{\Omega}p^{(can,\beta)}_j\log{\frac{e^{\beta E_j}}{Z(\beta)}}\nn[10pt]
+    &=\sum_{j=1}^{\Omega}p^{(can,\beta)}_j
+    \{\beta E_j+\log{Z(\beta)}\}
+    =\beta\braket{\hH}^{can}_{\beta}+\log{Z(\beta)}\nn[10pt]
+    &=\beta\{\braket{\hH}^{can}_{\beta}-F(\beta)\}
+    =\frac{1}{T}\{\braket{\hH}^{can}_{\beta}-F(\beta)\}
+    =S(\beta)
+\end{align}
+となる．温度一定の環境下には内部エネルギーと（使うことのできる量）自由エネルギー
+
+
+\section{相対エントロピーとK-Lダイバージェンス（relative entropy KL divergence）}
+\begin{kotak}
+	\begin{definition}[relative entropy KL divergence]
+	$\bm{p}$，$\bm{q}$を確率分布とする．このとき，相対エントロピー，または，K-Lダイバージェンスは
+	\be
+	D(\bm{p}|\bm{q})\equiv\sum_{j=1}^{\Omega}p_j\log{\frac{p_j}{q_j}}
+	\ee
+	で定義される．このとき，もし，少なくとも１つの$j$に対して，$p_j\neq0$かつ$q_j=0$ならば，$D(\bm{p}|\bm{q})=\infty$が成り立つ．
+	\end{definition}
+\end{kotak}
+KLダイバージェンスは以下の性質をもつ．
+\paragraph{basic property}
+非負性
+\begin{equation}
+    D(\bm{p}|\bm{q})\geq0
+\end{equation}
+等号成立条件
+\begin{equation}
+    D(\bm{p}|\bm{q})=0\iff \bm{p}=\bm{q}
+\end{equation}
+これらの証明を行う
+\begin{equation}
+    \log{x}\leq x-1,\ \ {\rm{for}}\ x>0
+\end{equation}
+が成り立つことを思い出す．このことから，
+\begin{equation}
+    \log{\frac{1}{x}}\geq1-x,\ \ ( \log{\frac{1}{x}}>1-x,\ \rm{if}\ x\neq1)
+\end{equation}
+が成り立つ．このことから，
+\begin{align}
+    D(\bm{p}|\bm{q})&=\sum_{j=1}^{\Omega}p_j\log{\frac{1}{q_j/p_j}}\geq \sum_{j=1}^{\Omega}p_j\left\{1-\frac{q_j}{p_j}\right\}=\sum_jp_j-\sum_jq_j=1-1=0
+\end{align}
+$D(\bm{p}|\bm{q})$は確率分布$\bm{p}$と$\bm{q}$の間の非対称な距離のことであるといえる．また$D$は$\bm{q}$を基準にしたとき，$\bm{p}$がどれくらい違うか（遠いか）を測っているといえる．例として，一様分布
+\begin{equation}
+    \bm{p}_u= \left(
+        \begin{array}{c}
+        p_1 \\
+        p_2 \\
+        \vdots \\
+        p_\Omega
+        \end{array}
+        \right)
+        =(p_j)_{j=1,\ldots,\Omega}
+\end{equation}
+を基準にKLダイバージェンスを見てみる．$\bm{q}=\bm{p}_u$とすると，
+\begin{align}
+    D(\bm{p}|\bm{p}_u)=\sum_j p_j(\log{p_j}+\log{\Omega})=\log{\Omega}-S(\bm{p})
+\end{align}
+が成り立つ．このことから，Shannon entropyというのは，KLダイバージェンスにおいて，基準を一様分布にしたもの
+であるといえる．KLダイバージェンスの非負性から
+\begin{equation}
+    \log{\Omega}\geq S(\bm{p})
+\end{equation}
+であることがわかる．
+
+
+
+
+
+\subsection{KLダイバージェンスの単調性(monotonicity of KL-divergence)}
+$\bm{p}$と$\bm{q}$を任意の確率分布とし，$T$を任意の確率行列とする．このとき，
+\begin{equation}
+    D(\bm{p}|\bm{q})\geq D(T\bm{p}|T\bm{q})
+\end{equation}
+が成り立つ．つまり，確率分布を時間発展させていくとKL-ダイバージェンスは元のものよりも小さくなることがわかる．\\
+証明\\
+
+
+
+
+
+\section{情報量の推定値ー対数尤度}
+真の分布がわかっている場合，相対エントロピー（K-L情報量）によって，モデルが良いか，悪いかを判断できた．しかし，通常は，真の分布は未知であり，真の分布から得られたデータのみが与えられている場合が多い．ここでは，真の分布が未知のときに，どのようにしてこの真の分布を近似するモデルの優劣を比較するかを考える．真の分布$\bm{p}=\{p_1,p_2,\cdots,p_m\}$にしたがって得られた$n$個の観測値$\{x_1,x_2,\ldots,x_n\}$が与えられているとする．各観測値$x_i$は事象$\omega_1,\cdots.\omega_m$のうちどれかひとつを取りうる．各事象$\omega_i$の起きた回数を$n_i$と表すことにすると，$n_1+n_1+\cdots+n_m=n$が成り立つ．ここで，このデータに基づいて，モデル$\bm{q}$に関する相対エントロピーをデータから推定することを考えてみる．K-L情報量は定義から，
+\begin{equation}
+    D(\bm{p}|\bm{q})\equiv\sum_{j=1}^{m}p_j\log{\frac{p_j}{q_j}}
+    =\sum_{j=1}^{m}p_i\log{p_i}-\sum_{j=1}^{m}p_j\log{q_i}
+\end{equation}
+と書き換えることができる．右辺初項は，真の分布$\bm{p}$のみに依存した定数である．したがって，右辺債2項が大きいほどK-L情報量$D(\bm{p}|\bm{q})$は小さくなることがわかる．つまり，K-L情報量の大小を比較するためには，$\sum_{j=1}^{m}p_j\log{q_i}$の値だけが推定できればよい．
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{}

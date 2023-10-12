@@ -1,0 +1,85 @@
+\section{凸解析}
+%
+
+%
+\subsection{関数の増加と減少}
+\paragraph{狭義単調増加}
+関数$f$が
+　\begin{align}
+　x_1<x_2\to f(x_1)<f(x_2)
+\end{align}
+を満たすとき，$f$は狭義単調増加するという．
+\paragraph{狭義単調減少}
+関数$f$が
+　\begin{align}
+　x_1<x_2\to f(x_1)>f(x_2)
+\end{align}
+を満たすとき，$f$は狭義単調減少するという．
+\paragraph{単調増加}
+関数$f$が
+　\begin{align}
+　x_1<x_2\to f(x_1)\leq f(x_2)
+\end{align}
+を満たすとき，$f$は単調増加するという．また，$f(x)=$定数も増加関数である．
+
+
+
+\paragraph{単調減少}
+関数$f$が
+　\begin{align}
+　x_1<x_2\to f(x_1)\geq f(x_2)
+\end{align}
+を満たすとき，$f$は単調減少するという．
+
+
+
+
+
+\section{凸関数}
+\subsection{1変数の凸関数}
+$f$を閉区間$[a,b]$で定義された連続な関数とする．また$a<x<b$において$f^\prime$および$f^{\prime\prime}$が存在すると仮定する．次の
+\begin{kotak}
+	\begin{theorem}[増減の判定条件]\label{thm1}
+	閉区間$[a,b]$における連続関数$f(x)$が，$a<x<b$なるすべての$x$において微分可能であるとする．このとき，
+	\begin{enumerate}
+	\item すべての$x$$(a<x<b)$で$f^\prime(x)>0$ならば，$f(x)$は$[a,b]$において増加関数である．
+	\item すべての$x$$(a<x<b)$で$f^\prime(x)<0$ならば，$f(x)$は$[a,b]$において減少関数である．
+　\end{enumerate}
+\end{theorem}
+\end{kotak}
+より$f^\prime(x)$の条件における$f(x)$の増減の判定条件がわかる．\\
+　それでは，すべての$x(a<x<b)$で$f^{\prime\prime}$が正の値をとるときに，曲線$y=f(x)$はどのような変化の様子となるか調べる．定理\ref{thm1}より$f^\prime(x)$は増加関数となる．\\
+　$f^\prime(x)$は曲線$y=f(x)$の点$(x,f(x))$のおける接線の傾きであるから，$x$が増加すると傾きも増加するので，図\ref{}のように曲線が上向きに湾曲していると考えられる．\\
+　この「上向きに湾曲している」というのは次のことを意味する．すなわち，「曲線上に任意に2点$P,Q$をとると，$P$と$Q$とを結ぶ割線$PQ$が$P$と$Q$を結ぶ曲線の上側に必ずある」ということである．このような場合にわれわれは，曲線$y=f(x)$が上に凹(concave upwards)，または下に凸(conve downwards)であるといい，関数$f$を凸関数であると呼ぶ．
+%
+　\begin{figure}[H]
+ \centering
+\begin{tikzpicture}
+ \draw[->,>=stealth,very thick] (-0.5,0)--(5.0,0)node[above]{}; %x軸
+ \draw[->,>=stealth,very thick] (0,-0.5)--(0,5.0)node[right]{}; %y軸
+ \draw (0,0)node[above left]{O}; %原点
+ \draw[black,samples=100,domain=0.5:5] plot(\x,{(0.8*\x-2)^2+2.0})node[right]{$f(x)$};
+ \draw[dashed] (pi*0.5,2.6)node[left]{P}--(4,3.4)--(4,0)node[below]{$x_1$}; %点(\pi,2)
+  \draw[dashed] (4,3.4)node[right]{Q}--(pi*0.5,2.6)--(pi*0.5,0)node[below]{$x_2$}; %点(\pi,2)
+\end{tikzpicture}
+  \label{sin}
+  \caption{$\sin\theta$のグラフ．（$0\leq\theta\leq\pi$）}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{}
+
+
+
+
+
+

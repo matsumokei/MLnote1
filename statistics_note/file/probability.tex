@@ -1,0 +1,230 @@
+\part{確率論の基礎}
+
+線形回帰とは，入力$\vec{x}$と出力$y$の間に線形的な関係があると仮定し，訓練データ集合$\mathcal{D}=\{(\vec{x}_1,y_1),\ (\vec{x}_2,y_2),\ (\vec{x}_N,y_N)\}$
+\section{Boltzmann machine}
+\section{可視変数のみのボルツマンマシン}
+\section{隠れ変数を持つボルツマンマシン}
+ボルツマン機械学習では，統計力学で基本となるカノニカル分布 (ボルツマン分布) に従ってデータ$\Vec{x}$が生成されると考える：
+\begin{equation}
+    P_B(\Vec{x}|\Vec{\Theta}) = \frac{1}{Z_B(\Vec{\Theta})}\exp{-E(\Vec{x}|\Vec{\Theta})}
+\end{equation}
+ここで，確率分布の引数$\Vec{x}$, $\Vec{\Theta}$はそれぞれイジング変数とパラメータを表す．パラメータ$\Vec{\Theta}$の中身は後で言及を行う．ここで，エネルギー関数は
+\begin{equation}
+    E(\Vec{x}|\Vec{\gamma},\Vec{c}) = -\sum_{(i,j)\in E}\gamma_{i,j} x_i x_j - \sum_{i \in V}c_ix_i
+\end{equation}
+のように相互作用項と外場項（バイアス項）の和により定義される．$Z_B(\vec{\Theta})$は規格化定数であり，分配関数と呼ばれ，
+次のように定義される：
+\begin{equation}
+    Z_B(\vec{\Theta}) = \sum_{\Vec{x}\in\{\pm1\}^{n}} \exp{(-E(\Vec{x}|\Vec{\Theta}))}
+\end{equation}
+ここで，上式中の和の記号は，
+\begin{equation}
+    \sum_{\Vec{x}} \equiv \prod_{i\in E} \sum_{x_i\in\{\pm 1\}} 
+    = \sum_{x_1\in\{\pm 1\}} \sum_{x_2\in\{\pm 1\}} \sum_{x_3\in\{\pm 1\}} 
+    \cdots \sum_{x_|E|\in\{\pm 1\}} 
+\end{equation}
+
+
+\begin{align}
+     E(\vec{v},\vec{h}) 
+    &= -\sum_{i,j}w_{i,j} v_i h_j -\sum_{j,j^\prime} \alpha_{j,j^\prime}h_j h_{j^{\prime}}
+    -\sum_{i,i^\prime} \beta_{i,i^\prime} v_i v_{i^{\prime}}\nn[10pt]
+    &\hspace{80pt}-\sum_{j} b_{j,j^\prime}h_j  -\sum_{i} a_{i} v_i
+\end{align}
+これを行列で表すと以下のようになる：
+\begin{equation}
+        E(\vec{v},\vec{h}) 
+        =-\Bigl[
+        \Vec{v}^{t}\hat{W}\Vec{h} + \Vec{h}^{t}\hat{A}\Vec{h} + \Vec{v}^{t}\hat{B}\Vec{h}
+        + \Vec{a}^{t}\Vec{h}+ \Vec{b}^{t}\Vec{h},
+        \Bigr]
+\end{equation}
+ここで，式中のベクトルと行列はそれぞれである：
+\begin{align}
+    \hat{A}
+    &
+    =
+    \left(
+        \begin{array}{cccc}
+       (\vec{x}_1)_1&(\vec{x}_1)_2&\cdots&(\vec{x}_1)_d\\[10pt]
+       (\vec{x}_2)_1&(\vec{x}_2)_2&\cdots&(\vec{x}_2)_d\\[10pt]
+       (\vec{x}_3)_1&(\vec{x}_3)_2&\cdots&(\vec{x}_3)_d\\[10pt]
+       \vdots&\vdots&\ddots&\vdots\\[10pt]
+       (\vec{x}_N)_1&(\vec{x}_N)_2&\cdots&(\vec{x}_N)_d\\[10pt]
+        \end{array}
+    \right),\ \ \ 
+    \vec{y}
+    &
+    =\left(
+        \begin{array}{c}
+       {y}_1\\[5pt]
+       {y}_2\\[5pt]
+       {y}_3\\[5pt]
+       \vdots\\[5pt]
+       {y}_N
+        \end{array}
+    \right)
+\end{align}
+\section{RBM}
+制限ボルツマンマシンは
+\begin{equation}
+    \alpha_{j,j^\prime} = \beta_{i,i^\prime} = 0
+\end{equation}
+すなわち，
+\begin{equation}
+    \Vec{a}^{t}\Vec{h} = \Vec{b}^{t}\Vec{h} = 0
+\end{equation}
+としたものをいう．これは，可視層同士，隠れ層同士の結合を考えないモデルに帰着する．制限ボルツマンマシンのエネルギー関数は
+
+\begin{align}
+     E(\vec{v},\vec{h}) 
+    &= -\sum_{i,j}w_{i,j} v_i h_j -\sum_{j} b_{j}h_j  -\sum_{i} a_{i} v_i\\[10pt]
+    &=-\Vec{v}^{t}\hat{W}\Vec{h} - \Vec{h}^{t}\hat{A}\Vec{h} - \Vec{v}^{t}\hat{B}\Vec{h}
+\end{align}
+これを行列で表すと以下のようになる：
+\subsection{制限ボルツマンマシンの条件付き確率の独立性}
+可視層を固定したもとでの，制限ボルツマンマシンの隠れ層の条件付き確率は，以下のように書ける：
+\begin{equation}
+    P(\vec{h}|\vec{v};\vec{\Theta}) 
+    = \frac{P(\vec{h},\vec{v};\vec{\Theta})}{P(\vec{v}|\vec{\Theta})}
+    =\prod_{i=1}^{N} \frac{\exp{\lambda^{H}_j h_j}}{2\cosh{\lambda^{H}_j h_j}}
+\end{equation}
+ここで，
+\begin{equation}
+    \lambda^{H}_i \equiv b_i + \sum_{j=1}^{N} w_{i,j} v_j.
+\end{equation}
+また，隠れ層を固定したもとでの，制限ボルツマンマシンの可視層の条件付き確率は，以下のように書ける：
+\begin{equation}
+    P(\vec{v}|\vec{h};\vec{\Theta}) 
+    = \frac{P(\vec{v},\vec{h};\vec{\Theta})}{P(\vec{h}|\vec{\Theta})}
+    =\prod_{i=1}^{N} \frac{\exp{\lambda^{V}_j v_j}}{2\cosh{\lambda^{V}_j v_j}}
+\end{equation}
+ここで，
+\begin{equation}
+    \lambda^{V}_i \equiv a_i + \sum_{j=1}^{N} w_{i,j} h_j.
+\end{equation}
+
+これを証明する：
+\begin{equation}
+    P(\vec{v}|\vec{h};\vec{\Theta}) = \frac{P(\vec{v},\vec{h};\vec{\Theta})}{P(\vec{h}|\vec{\Theta})}
+\end{equation}
+を考える．可視変数$\vec{v}$に関する周辺確率は
+\begin{equation}
+    P(\vec{h}|\vec{\Theta}) = \sum_{\vec{v}}P(\vec{v},\vec{h};\vec{\Theta})
+\end{equation}
+と書ける．これを用いることで，
+\begin{align}
+    P(\vec{v}|\vec{h};\vec{\Theta}) 
+    &= \frac{P(\vec{v},\vec{h};\vec{\Theta})}{P(\vec{h}|\vec{\Theta})}
+    = \frac{P(\vec{v},\vec{h};\vec{\Theta})}{\sum_{\vec{v}}P(\vec{v},\vec{h};\vec{\Theta})}\nn[10pt]
+    &=\frac{\exp{\biggl[\sum_{i,j}w_{i,j} v_i h_j  +\sum_{i} a_{i} v_i
+    \textcolor{blue}{+\sum_{j} b_{j}h_j}
+    \biggr]}}
+    {\sum_{\vec{v}}\exp{\biggl[\sum_{i,j}w_{i,j} v_i h_j  +\sum_{i} a_{i} v_i
+    \textcolor{blue}{+\sum_{j} b_{j}h_j} 
+    \biggr]}}\nn[10pt]
+    &=\frac{\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{i,j}w_{j}  h_j  + a_{i}\Bigr\}
+    \textcolor{blue}{+\sum_{j} b_{j}h_j}
+    \biggr]}}
+    {\sum_{\vec{v}}\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \textcolor{blue}{+\sum_{j} b_{j}h_j}
+    \biggr]}}
+\end{align}
+ここで，$\vec{v}$に対する和に関係のない項$\textcolor{blue}{+\sum_{j} b_{j}h_j}$は約分できる：
+\begin{align}
+    P(\vec{v}|\vec{h};\vec{\Theta}) 
+    &=\frac{\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}\biggr]
+    \exp\biggl[\textcolor{blue}{+\sum_{j} b_{j}h_j}
+    \biggr]}}
+    {\sum_{\vec{v}}\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{i,j}w_{j}  h_j  + a_{i}\Bigr\}\biggr]
+    \exp\biggl[\textcolor{blue}{+\sum_{j} b_{j}h_j}
+    \biggr]}}\nn[10pt]
+    &=\frac{\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+    {\sum_{\vec{v}}\exp{\biggl[\sum_{i}v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}\nn[10pt]
+    &=\frac{\prod_{i=1}^{N}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+    {\sum_{\vec{v}}\prod_{i=1}^{N}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}\nn[10pt]
+    &=\frac{\prod_{i=1}^{N}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+    {\sum_{\vec{v}}\prod_{i=1}^{N}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+\end{align}
+ここで，
+\begin{align}
+    \sum_{\vec{v}}\prod_{i=1}^{N}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}
+    &=\prod_{i=1}^{N}\biggl[
+    \sum_{v_i}\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]
+    \biggr]}\nn[10pt]
+    &=\prod_{i=1}^{N}
+    2\cosh{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}
+\end{align}
+
+
+\begin{align}
+    P(\vec{v}|\vec{h};\vec{\Theta}) 
+    &=\prod_{i=1}^{N}
+    \frac{\exp{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+    {
+    2\cosh{\biggl[v_i\Bigl\{\sum_{j}w_{i,j}  h_j  + a_{i}\Bigr\}
+    \biggr]}}
+\end{align}
+
+
+
+
+\section{neural quantum state}
+
+\section{重要な公式集}
+\begin{equation}
+    \sum_{x=\pm1}\exp{(ax)}=\exp{a}+\exp{-a} = 2\cosh{a}
+\end{equation}
+多変数への拡張
+\begin{align}
+    \sum_{\vec{x}\in\{\pm1\}^{N}}\exp{(\vec{a}^{\ t}\vec{x})}
+    &=\sum_{\vec{x}\in\{\pm1\}^{N}}\exp{\Bigl(\sum_{i=1}^N a_ix_i\Bigr)}\nn[10pt]
+    &=\sum_{\vec{x}\in\{\pm1\}^{N}}\prod_{i=1}^N\exp{\Bigl( a_ix_i\Bigr)}\nn[10pt]
+    &=\prod_{i=1}^N\Biggl[
+    \sum_{x_i=\{\pm1\}}\exp{\Bigl( a_ix_i\Bigr)}
+    \Biggr]\nn[10pt]
+    &=\prod_{i=1}^N\Biggl[
+    2\cosh{(a_ix_i)}
+    \Biggr]
+\end{align}
+ここで，2番目から3番目の等式に移る際に，
+\begin{equation}
+    \sum_{x_1=\pm1}\sum_{x_2=\pm1}\cdots\sum_{x_N=\pm1}
+    \prod_{i=1}^N\exp{\Bigl( a_ix_i\Bigr)}\nn[10pt]
+    =\prod_{i=1}^N\Biggl[
+    \sum_{x_i=\{\pm1\}}\exp{\Bigl( a_ix_i\Bigr)}
+    \Biggr]
+\end{equation}
+という関係式が一般的に成り立つことを用いた．これは，2次元の場合に簡単に確認できる：
+\begin{align}
+    \sum_{x_1=\pm1}\sum_{x_2=\pm1}
+    \prod_{i=1}^2\exp{\Bigl( a_ix_i\Bigr)}
+    &=\sum_{x_1=\pm1}\sum_{x_2=\pm1}
+    \exp{\Bigl( a_1 x_1 + a_2 x_2\Bigr)}\nn[10pt]
+    &=
+    e^{a_1 + a_2}
+    +e^{a_1  - a_2 }
+    +e^{- a_1  + a_2 }
+    +e^{- a_1 - a_2}\nn[10pt]
+    &=
+    e^{a_1}
+    (e^{a_2}+e^{ - a_2 })
+    +e^{- a_1 }
+    (e^{a_2}+e^{ - a_2 })\nn[10pt]
+    &=
+    (e^{a_1}+e^{- a_1 })
+    (e^{a_2}+e^{ - a_2 })\nn[10pt]
+    &=\prod_{i=1}^2\Biggl[
+    \sum_{x_i=\{\pm1\}}\exp{\Bigl( a_ix_i\Bigr)}
+    \Biggr]
+\end{align}

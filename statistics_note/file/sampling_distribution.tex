@@ -1,0 +1,191 @@
+\part{標本分布}
+
+\section{母集団とランダム標本}
+サイコロを振った場合の1回ごとの試行結果や，ねじを抽出した場合のそれぞれのねじのように，実験や観測を行う１つ１つの対象を個体といい，考えている個体全部の集合を母集団という．特に，母集団の中にある個体の数が有限の場合を有限母集団，無限の場合を無限母集団という．
+
+
+
+
+$n$個の確率変数$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$が互いに独立でそれぞれ同一の確率分布に従うとする．このとき，確率変数$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$は，その確率分布がもつ母集団からの大きさ$n$のランダム標本という．
+
+\subsection*{統計量}
+確率変数$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$をランダム標本とすると，$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$の関数を統計量という．そして統計量の確率分布を標本分布という．ここで，統計量はランダム変数を変数変換したものであるため，統計量自身も確率変数であることに注意が必要である．
+
+
+
+\subsection{標本積率}
+ランダム標本$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$に対して，
+\begin{equation}
+    \hat{M}_{r} = \frac{1}{n} \sum_{i=1}^{n} \hat{X}_i^r
+\end{equation}
+を$r$次の標本積率という．
+
+特に，$r=1$の場合
+\begin{equation}
+    \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} \hat{X}_i
+\end{equation}
+を標本平均という．
+また，
+\begin{equation}
+    \frac{1}{n} \sum_{i=1}^{n} (\hat{X}_i - \bar{X}_i)^r
+\end{equation}
+を$\bar{X}_{n}$のまわりの$r$次の標本積率と呼ぶ．
+このとき，特に$r=2$の場合を標本分散と呼び，
+\begin{equation}
+    \hat{S}_{n}^2 = \frac{1}{n}
+    \sum_{i=1}^{n} (\hat{X}_i - \bar{X}_i)^2
+\end{equation}
+と表す．
+また，
+\begin{equation}
+    \hat{S}_{n}=\sqrt{\hat{S}_{n}^2} = 
+    \sqrt{
+    \frac{1}{n}
+    \sum_{i=1}^{n} (\hat{X}_i - \bar{X}_i)^2}
+\end{equation}
+を標本標準偏差という．
+
+\subsection{標本平均の期待値と分散}
+$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_n$が母集団確率変数$\hat{X}$からの大きさ$n$のランダム標本とする．母集団の平均と分散がそれぞれ，
+\begin{align}
+    \mathbb{E}[\hat{X}] &= \mu\\[10pt]
+    \text{Var}[\hat{X}] &= \sigma^2
+\end{align}
+であるとき，標本平均の期待値と分散は
+\begin{align}
+    \mathbb{E}[\bar{X}_n] &= \mu\\[10pt]
+    \text{Var}[\bar{X}_n] &= \sigma^2 / n
+\end{align}
+となる．これを示す：
+期待値と分散に関する線形性と，ランダム標本の期待値と分散がそれぞれ$\mathbb{E}[\hat{X}_i] = \mu$, $\text{Var}[\bar{X}_n] = \sigma^2$, $(i=1,\ \cdots,\ n)$に従うことを用いると，
+\begin{align}
+    \mathbb{E}[\bar{X}_n] &= E\left[\sum_{i=1}^n\hat{X}_i / n\right]
+    =\frac{1}{n}E\left[\sum_{i=1}^n\hat{X}_i\right]
+    =\frac{1}{n}\sum_{i=1}^n\mathbb{E}[\hat{X}_i]
+    =\frac{1}{n}\cdot n \mu
+    =\mu
+\end{align}
+
+
+\begin{align}
+    \text{Var}[\bar{X}_n] &= \text{Var}\left[\sum_{i=1}^n\hat{X}_i / n\right]
+    =\frac{1}{n}\text{Var}\left[\sum_{i=1}^n\hat{X}_i\right]
+    =\frac{1}{n}\sum_{i=1}^n\text{Var}[\hat{X}_i]
+    =\frac{1}{n}\cdot n \sigma^2
+    =\sigma^2
+\end{align}
+
+\section{静的モンテカルロ法}
+\subsection{1次元モンテカルロ積分}
+モンテカルロ積分の目的は，乱数を用いて，積分値を推定することである．
+区間$a\leq x \leq b$上のなめらかな関数$g(x)$に関する積分$I$を考える：
+\begin{equation}
+    I = \int_{a}^{b} g(x) dx
+\end{equation}
+積分区間$a\leq x \leq b$に対応して，一様分布$U[a,b]$に基づいて，乱数を生成し，これを用いて，積分$I$を推定することを考える．
+
+確率変数$\hat{X}$が一様分布$U[a,b]$に従うとする：$\hat{X}\sim U[a,b]$．
+統計量$g(\hat{X})$の期待値$\mathbb{E}[g(\hat{X})]$に関して，以下が成り立つ：
+\begin{equation}
+    \mathbb{E}[g(\hat{X})] = \int_{a}^b g(x) f_{\hat{X}}(x) dx =\frac{1}{(b-a)}\int_{a}^b g(x) dx
+\end{equation}
+ここで，$f_{\hat{X}}(x)$は一様分布$U[a,b]$に対する確率変数$\hat{X}$の確率密度関数であり，以下のように定義される：
+\begin{align}
+f_{\hat{X}}(x) = 
+\left\{
+    \begin{array}{l}
+    \dfrac{1}{(b-a)}\ a\leq x \leq b \\[10pt]
+    0\ \text{other}
+    \end{array}
+\right.
+\end{align}
+
+次に，一様分布$U[a,b]$に従う確率変数$\hat{X}$で記述される系と完全に同じ系を独立に$N$個用意する：
+\begin{equation}
+    \{\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_N \}
+\end{equation}
+そして，統計量$g(\hat{X}_1),\ g(\hat{X}_2),\ \cdots,\ g(\hat{X}_N)$の標本平均$\hat{\theta}$を考える：
+\begin{equation}
+    \hat{\theta} = \frac{1}{N}\sum_{i=1}^{N} g(\hat{X}_i)
+\end{equation}
+ここで，サンプル数$N$を増やしていけば，($N\to\infty$), 大数弱の法則より，
+\begin{equation}
+    \lim_{N\to\infty}\hat{\theta} =  \lim_{N\to\infty}\frac{1}{N}\sum_{i=1}^{N} g(\hat{X}_i)
+    =\mathbb{E}[g(\hat{X})]=\frac{1}{(b-a)}\int_{a}^b g(x) dx=\frac{1}{(b-a)}I
+\end{equation}
+が成立する．これをより詳しく見てみる．上式を変形すれば，
+\begin{equation}
+    I=(b-a)\lim_{N\to\infty}\hat{\theta}
+    =\lim_{N\to\infty}\frac{(b-a)}{N}\sum_{i=1}^{N} g(\hat{X}_i)
+\end{equation}
+となる．この式が意味するのは，積分$I$に対して，区分求積法を実行することに対応している．ここで，サンプル数$N$は積分区間の分割数に対応している．これが，乱数を用いて，積分が実行できる理由である．
+
+実際のアルゴリズムは，以下のように実行される：
+\subsection*{Step1}
+まず，一様分布$U[a,b]$にしたがって，乱数を発生させ，確率変数$\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_N$にそれぞれ対応する観測値$x_1,\ x_2,\ \cdots,\ x_N$をサンプリングする．
+
+\subsection*{Step2}
+そして，$g(\hat{X}_1),\ g(\hat{X}_2),\ \cdots,\ g(\hat{X}_N)$にそれぞれ対応する観測値$g(x_1),\ g(x_2),\ \cdots,\ g(x_N)$を求め，それらの平均
+\begin{equation}
+    \theta = \frac{1}{N} \sum_{i=1}^{N} g(x_i)
+\end{equation}
+を求めることで，積分$I$が計算できる．
+
+先ほどまでは，一様分布に従って，乱数を発生させ，積分を実行していた．また，一様分布を使うと，得たい期待値の分散は基本的に大きくなる．したがって，分散の小さい分布を用いてサンプリングを行う必要がある．一様分布以外の確率分布からサンプリングを行うことも可能である．これを実行するのが重点サンプリング (Importance Sampling)と呼ばれる方法である．
+
+重点サンプリングでは，まず，求めたい非積分関数$g(x)$をサンプリングしたい分布$P_{\hat{X}}(x)$で割った関数$g(x) / P_{\hat{X}}(x)$を考える．ここで，確率変数$\hat{X}$はある確率分布$P_{\hat{X}}(x)$にしたがっている．このとき，確率分布$P_{\hat{X}}(x)$に関する$g(x) / P_{\hat{X}}(x)$の期待値は
+\begin{equation}
+    \mathbb{E}\left[
+    \frac{g(\hat{X})}{P_{\hat{X}}(x)}
+    \right]
+    =\int \frac{g(x)}{P_{\hat{X}}(x)}P_{\hat{X}}(x)dx = \int g(x) dx
+\end{equation}
+となる．そして，確率分布$P_{\hat{X}}(x)$に従う確率変数$\hat{X}$で記述される系と完全に同じ系を独立に$N$個用意する：
+\begin{equation}
+    \{\hat{X}_1,\ \hat{X}_2,\ \cdots,\ \hat{X}_N \}
+\end{equation}
+そして，統計量$g(\hat{X}_1) / P(\hat{X}_1),\ g(\hat{X}_2)/ P(\hat{X}_2),\ \cdots,\ g(\hat{X}_N) / P(\hat{X}_N)$の標本平均$\hat{\theta}$を考える：
+\begin{equation}
+    \hat{\theta} = \frac{1}{N}\sum_{i=1}^{N} \frac{g(\hat{X}_i)}{P(\hat{X}_i)}
+\end{equation}
+ここで，サンプル数$N$を増やしていけば，($N\to\infty$), 大数弱の法則より，
+\begin{equation}
+    \lim_{N\to\infty}\hat{\theta} =  \lim_{N\to\infty}\frac{1}{N}\sum_{i=1}^{N} \frac{g(\hat{X}_i)}{P(\hat{X}_i)}
+    =\mathbb{E}[g(\hat{X})]=\int g(x) dx=I
+\end{equation}
+が成立する．したがって，積分$\int g(x) dx$が推定できることがわかる．
+
+\subsection{逆関数法を用いた確率分布の生成}
+
+
+\section{Isingモデルのモンテカルロシミュレーション}
+全ての状態についての足し上げは極めて困難である．そこで，あるスピン配位$C$が実現する確率を
+\begin{equation}\label{spin_distribution}
+    P(C) = \frac{1}{Z}(e^{-\beta E[C]})
+\end{equation}
+に従い，確率的にスピン配位$C$を生成して，生成したスピン配位$C$を使った平均を用いて期待値を推定する．
+
+しかしスピン配位$C$の実現確率\eqref{spin_distribution}は直接は計算できない．なぜならば，分母にある分配関数$Z$を計算するためには，結局すべての組合せを取る必要があるからである．そこで，分配関数$Z$を計算を避けてスピン配位を生成する確率分布を用意する必要がある．我々が求める確率分布を生成する手法の一つがマルコフ連鎖モンテカルロ法である．
+
+\subsection{基本原理}
+配位に対応する物理量$\hat{C}$が確率分布$P(C)$に従うとする．このとき，推定量$f(\hat{C})$に関する期待値は一般的に以下のように書ける：
+\begin{equation}
+    \mathbb{E}[f(\hat{C})] = \sum_{C}f(C)P(C)
+\end{equation}
+ここで，$f(\hat{C})$も（配位に関する）物理量であり，磁化率などが対応している．また，$\sum_{C}$は全ての可能なスピン配位についての足し上げを表す．格子点数（スピン数）が$N$個のIsingモデルを考えるとき，取り得る全配位数は$|C|=2^N$個となる．
+
+ここで，$2^N$個の配位についての和は取りたくない．そこで，$2^N$個よりも少ない，有限のサンプル数$|C_{\text{fin}}|$のサンプル
+\begin{equation}
+    C_{\text{fin}} = \{\hat{C}_{1},\ \hat{C}_{2},\ \cdots,\ \hat{C}_{|C_{\text{fin}}|}\}
+\end{equation}
+から配位を用意する．ここで，サンプル$C_{\text{fin}}$はそれぞれ，$\hat{C}$と同じ確率分布に従う．すなわち，$C_{\text{fin}}$はそれぞれ$\hat{C}$と完全に同じ系を表す．そして，期待値$\mathbb{E}[f(\hat{C})]$を評価する代わりに，
+\begin{equation}
+    \hat{\theta} = \frac{1}{|C_{\text{fin}}|}\sum_{\hat{C}_{k}\in C_{\text{fin}}}
+    f(\hat{C}_k)
+\end{equation}
+をサンプリングによって評価する．
+これは，大数弱の法則から，サンプル数を多くとれば，
+\begin{equation}
+    \mathbb{E}[f(\hat{C})] \simeq \frac{1}{|C_{\text{fin}}|}\sum_{C_{k}\in C_{\text{fin}}} f(C_{k})
+\end{equation}
+に近づく．この確率分布$P(C)$をマルコフ連鎖モンテカルロ法で作り，この分布に従い配位をサンプリングしてやり，平均を計算すれば，物理量を求めることができる．

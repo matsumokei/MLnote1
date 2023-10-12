@@ -1,0 +1,117 @@
+\section{教師あり機械学習}
+全データを訓練データとテストデータの２種類に分ける．訓練データはトレーニングに用いるデータであり，テストデータは学習し終えたモデルをテストするためのデータである．
+
+用意すべき訓練データとして，入力データ$\mathcal{X}=\{\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_N\}$と出力データ$\mathcal{Y}=\{\vec{y}_1,\vec{y}_2,\ldots,\vec{y}_N\}$を用意する：$\mathcal{D}=\mathcal{X}\times\mathcal{Y}=\{(\vec{x}_1,\vec{y}_1),(\vec{x}_2,\vec{y}_2),\ldots,(\vec{x}_N,\vec{y}_N)\}$ここで，$\vec{x}_i\in\mathbb{R}^n$, $\vec{y}_i\in\mathbb{R}^m$である．機械学習の目的は，与えられた入力$\vec{x}$とその出力$\vec{y}$の関係を知ることである．つまり，
+\begin{equation}
+    \vec{y} = f(\vec{x})
+\end{equation}
+という関係において，$f$を知ることが目的である．ここでは，$N$個の訓練データがあるが，その中から1つだけデータを選び，それを$(\vec{x},\vec{y})$とおくこととする．
+最も簡単な関数は，次である：
+\begin{equation}
+    \vec{y}=f(\vec{x}) = \hat{W}\vec{x} + \vec{b}
+\end{equation}
+\begin{equation}
+    y_j= \sum_{i=1}^{n}w_{j,i}x_i + b_i
+\end{equation}
+ここで，$\vec{y}\in\mathbb{R}^m$, $\vec{x}\in\mathbb{R}^n$, $\hat{W}\in\mathbb{R}^{m\times n}$, $\vec{b}\in\mathbb{R}^m$である：
+\begin{equation}
+     \vec{y}=\left(
+        \begin{array}{c}
+       y_1\\[10pt]
+       y_2\\[10pt]
+       \vdots\\[10pt]
+       y_m
+        \end{array}
+        \right),\ \ \ 
+        \vec{x}=\left(
+        \begin{array}{c}
+          x_1\\[10pt]
+       x_2\\[10pt]
+       \vdots\\[10pt]
+       x_n
+        \end{array}
+        \right),\ \ \ 
+        \vec{b}=\left(
+        \begin{array}{c}
+          b_1\\[10pt]
+       b_2\\[10pt]
+       \vdots\\[10pt]
+       b_m
+        \end{array}
+        \right)
+\end{equation}
+
+\begin{equation}
+     \hat{W}=
+     \left(
+        \begin{array}{ccccc}
+       w_{11}&w_{12}& \dots  & \dots& w_{1n}\\[5pt]
+       w_{21}&w_{22}& \dots  & \dots& w_{2n}\\[5pt]
+      \vdots&\vdots&\ddots &  & \vdots\\[5pt]
+      \vdots&\vdots& &\ddots  & \vdots\\[5pt]
+       w_{m1}&w_{m2}& \dots  & \dots& w_{mn}
+        \end{array}
+        \right)
+\end{equation}
+
+次に，次のような関数を考えてみよう．
+\begin{equation}
+    \vec{y} = \hat{W}_2\{\sigma(\hat{W}_1\vec{x}+\vec{b}_1)\} + \vec{b}_2
+\end{equation}
+ここで，$\vec{y}\in\mathbb{R}^m$, $\vec{x}\in\mathbb{R}^n$, $\hat{W}_1\in\mathbb{R}^{l\times n}$, $\hat{W}_2\in\mathbb{R}^{m\times l}$, $\vec{b}\in\mathbb{R}^m$, $\vec{b}_1\in\mathbb{R}^l$, $\vec{b}_2\in\mathbb{R}^m$である．また$\sigma(\cdot)$はベクトルに作用し，ベクトルを返す：
+\begin{equation}
+    \sigma(\vec{x}) = (\sigma(x_1)\ \sigma(x_2)\ \cdots\ \sigma(x_n))
+\end{equation}
+次に，また$\sigma(\cdot)$を重ねれば，
+\begin{equation}
+   \vec{y} = \sigma(\hat{W}_3\sigma(\hat{W}_2\sigma(\hat{W}_1\vec{x}+\vec{b}_1) + \vec{b}_2)+\vec{b}_3)
+\end{equation}
+となる．これは次のように漸化式で書くことができる：
+\begin{equation}
+    \vec{a}^{l} = \sigma(\hat{W}^{l}\vec{a}^{l-1} + \vec{b}^{l})
+\end{equation}
+と書ける．ここで，出力と入力（初期値）はそれぞれ$\vec{y}=\vec{a}^{L}$, $\vec{x}=\vec{a}^{0}$とおいた．さらに，非線形関数$\sigma(\cdot)$に通す前の出力を
+\begin{equation}
+    \vec{z}^{l} = \hat{W}^{l} \vec{a}^{l-1} + \vec{b}^{\ l-1}
+\end{equation}
+を定義すれば，
+\begin{equation}
+    \vec{y}=\vec{f}(\vec{x}) = \sigma(\vec{z}^{L}),\ \vec{a}^{0} = \vec{x}
+\end{equation}
+とまとめることができる．
+これを$L$層のニューラルネットワークという．$l$層目の出力$\vec{a}^{l}$の要素$a_j^{l}$の添え字$j$はユニットを表している．
+
+ニューラルネットワーク$f(\cdot)$はある入力$\vec{x}$があったとき，その出力が訓練データ$\vec{y}_i$にできるだけ近くなるように設計された方がよい．つまり，関数としては
+\begin{equation}
+    \vec{y} = f(\vec{x}) = \sigma(\vec{z}^{l}) \simeq \vec{y}_i
+\end{equation}
+となるような関数$f$が欲しい．このとき，次のをコスト関数，二乗誤差(Squared error)
+\begin{equation}
+    E = \|\vec{y}_i- f(\vec{x})\|
+\end{equation}
+が最小となるように$f$を構築すればよい．ここで，複数の訓練データについては，平均二乗誤差
+\begin{equation}
+    L(\vec{\theta}) = \frac{1}{N}\sum_{i = 1}^{N}\|\vec{y}_i - f_{\vec{\theta}}(\vec{x}_i)\| 
+\end{equation}
+をコスト関数として扱う．ここで，$\theta=(\hat{W},\ \vec{b})$であるから，$E$を最小化するための条件は
+\begin{align}
+    \frac{\partial E}{\partial w_{ij}^{l}}=0,\ \ \ \frac{\partial E}{\partial b_{j}^{l}}=0
+\end{align}
+であり，この条件を満たす，$\theta=(\hat{W},\ \vec{b})$を決めればよい．このようなパラメータを求めるためには，パラメータに関する微分が重要であることがわかる．
+
+
+
+
+
+\subsection{}
+\begin{equation}
+    \hat{C}^{\rm{Ti}}=\Biggl(
+    \bm{c}_1^{\rm{Ti}}\ \vec{c}_2^{\rm{Ti}}\ \bm{c}_1^{\rm{Ti}}\ \bm{c}_3^{\rm{Ti}}\ \bm{c}_4^{\rm{Ti}}\ \bm{c}_5^{\rm{Ti}}\ \bm{c}_6^{\rm{Ti}}\ \bm{c}_7^{\rm{Ti}}\ \bm{c}_8^{\rm{Ti}}
+    \Biggr)
+\end{equation}
+
+\begin{equation}
+    \hat{C}^{\rm{O}}
+\end{equation}
+
+

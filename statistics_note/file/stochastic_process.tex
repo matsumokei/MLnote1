@@ -1,0 +1,258 @@
+\part{確率過程}
+\section{Introduction}
+ここではMarkov過程について考える．Markov過程は主に次の2種類に区別される．
+\begin{kotak}
+	\begin{definition}[マルコフ連鎖(Markov chain)]
+	離散時間における離散状態を取るMarkov過程のこと
+	\end{definition}
+	\begin{definition}[マルコフジャンプ過程(Markov jump process)]
+	連続時間における離散状態を取るMarkov過程のこと
+	\end{definition}
+\end{kotak}
+
+
+
+\section{Markov process with discrete state}
+
+\subsection{Markov chain}
+\paragraph{基本的な定義}
+とびとびの状態を$j=1,2,\ldots,\Omega$とおく．ある時点で状態が$j$である確率を$p_j$とする．確率$p_j$は規格化条件
+\begin{equation}
+    0\leq p_j \leq1,\ \ \ \sum_{j=1}^{\Omega}p_j=1
+\end{equation}
+を満たす．確率$p_j$を並べると，確率分布(確率ベクトル)は，
+\begin{equation}
+    \bm{p} = \left(
+        \begin{array}{c}
+        p_1 \\
+        p_2 \\
+        \vdots \\
+        p_\Omega
+        \end{array}
+        \right)
+        =(p_j)_{j=1,\ldots,\Omega}
+\end{equation}
+と書くことができる．状態が$k$から$j$に移る確率$T_{j,k}$を遷移確率，推移確率 (transition probability)と呼ぶ．そして，遷移確率を成分とする$\Omega\times\Omega$行列
+\begin{equation}
+    T=(T_{j,k})_{j,k=1,\ldots,\Omega}
+\end{equation}
+を確率行列と呼ぶ．確率行列の成分である，遷移確率は
+\begin{equation}
+    0\leq T_{j,k}\leq 1
+\end{equation}
+と，任意の$k$に対して，規格化条件
+\begin{equation}\label{normalize_condition}
+    \sum_{j=1}^{\Omega}T_{j,k}=1
+\end{equation}
+を満たす．
+\paragraph{確率の保存則}
+任意の確率行列$T$と任意の$\Omega$この成分をもつ列ベクトル$\bm{v}$について，
+\begin{equation}
+    \sum_{j=1}^{\Omega} (T\bm{v})_i = \sum_{j,k=1}^{\Omega}T_{j,k}(\bm{v})_k = \sum_{j=1}(\bm{v})_j 
+\end{equation}
+が成り立つ．ここで，2番目の等式で，規格化条件\eqref{normalize_condition}を用いた．
+
+
+
+
+
+\section{マルコフ連鎖Markov chain}
+離散時間$n=0,1,2,\ldots$における確率行列$T^{(n)}$，$n=1,2,\ldots$を考える．\\
+基本的なアイデア：時刻$n-1$に系が状態$k$にいたとすると，そのとき，時刻$n$に系が状態$j$にいる確率行列は，$T_{j,k}^{(n)}$となる．\\
+確率過程：状態$j$は確率的に決定される．\\
+マルコフ過程：直前の時刻の状態が次の状態を決める．\\
+
+時刻$n$に系が状態$j$にいる確率を$p_j^{(n)}$とする．時刻$n$での確率分布を$\bm{p}^{(n)}=(p_j^{(n)})_{j=1,\ldots,\Omega}$とする．時刻$n-1$に系が状態$k$にいる確率に確率行列$T_{j,k}^{(n)}$をかければ，時刻$n$に系が状態$j$にいる確率が得られる：
+\begin{equation}
+    p_{j}^{(n)}=\sum_{k=1}^{\Omega}T_{j,k}^{(n)}p_k^{(n-1)}
+\end{equation}
+確率分布で書くと，
+\begin{equation}
+    \bm{p}^{(n)}=T^{(n)}\bm{p}^{(n-1)}
+\end{equation}
+である．つまり，時間発展の規則は，確率行列をかければよい．系が初期状態の場合の確率分布を$\bm{p}^{(0)}=(p_1^{(0)},p_2^{(0)},\ldots,p_{\Omega}^{(0)})^{t}$と記述する．すると，時刻1での確率分布は$\bm{p}^{(1)}=T^{1}\bm{p}^{(0)}$であり，以下，$\bm{p}^{(2)}=T^{2}\bm{p}^{(1)}$のように，次々と次の時刻での確率分布が決定される．したがって，
+\begin{equation}
+    \bm{p}^{(n)}=T^{(n)}T^{(n-1)}\cdots T^{(1)}\bm{p}^{(0}
+\end{equation}
+と書くことができる．kのように確率分布が時間と共に確率的に変化するのが，有限離散状態・離散時間のマルコフ連鎖である．
+
+
+
+\paragraph{単調性}
+初期分布は異なるが，状態を遷移させるために用いる確率行列は等しいとする．このとき，
+\begin{equation}
+    \bm{p}^{(n)}=T^{(n)}\bm{p}^{(n-1)},\ \bm{q}^{(n)}=T^{(n)}\bm{q}^{(n-1)}
+\end{equation}
+このとき，相対エントロピーは
+\begin{equation}
+    D(\bm{p}|\bm{q})\geq D(T\bm{p}|T\bm{q})
+\end{equation}
+が成り立つので，
+\begin{equation}
+    D(\bm{p}^{(n-1)}|\bm{q}^{(n-1)})\geq D(\bm{p}^{(n)}|\bm{q}^{(n)})
+\end{equation}
+が成り立つ．つまり，2つの確率分布の距離は決して増えることはないということがわかる．
+
+\paragraph{経路の確率path prob}
+初期分布が$\bm{p}^{(0)}$であり，マルコフ連鎖によって時刻$n$まで時間発展したとき，時刻$0,1,\ldots,n$において，系が状態$j_0,j_1,\ldots,j_n$である確率は，
+\begin{equation}
+    p_{j_0,j_1,\ldots,j_n}\equiv
+    T_{j_n,j_{n-1}}^{(n)}T_{j_{n-1},j_{n-2}}^{(n-1)}\cdots T_{j_1,j_0}^{(1)}p_{j_0}^{(0)}
+\end{equation}
+と定義される．これは，図に示すように，歴史の確率，経路の確率を表しているといえる．
+そして，この確率は，
+\begin{equation}
+    \sum_{j_0,\ldots,j_n=1}^{\Omega}p_{j_0,j_1,\ldots,j_n}=1
+\end{equation}
+を満たし，確率分布で書けば，
+\begin{equation}
+    \bm{p}=(p_{j_0,\ldots,j_n})_{j_0,\ldots,j_n=1,\ldots,\Omega}
+\end{equation}
+$\{1,\ldots,\Omega\}^n$
+
+
+
+
+
+
+\subsection{詳細釣り合いの条件(detailed balance condition)}
+まず目的分布として，定常分布が与えられとする．この分布をを実現するような遷移確率は何かを考えるという状況を考える．定常分布$\bm{p}^{(s)}=(p_j^{(s)})_{j=1,\ldots,\Omega}$が与えられたとする．すべての$j=1,\ldots,\Omega$に対して，$p^{(s)}_j>0$とする．ここで，詳細つり合いの条件を導入する：
+
+\begin{kotak}
+	\begin{definition}[詳細釣り合いの条件(detailed balance condition)]
+	もしも，任意の$j\neq k$に対して
+	\begin{equation}
+	    T_{j,k}\bm{p}^{(s)}_k = T_{k,j}\bm{p}^{(s)}_j
+	\end{equation}
+	を満たすような確率分布$\bm{p}^{(s)}_j$が存在するとする．このとき，遷移確率$T_{j,k}$ $j,k=1,\ldots,\Omega$は$\bm{p}^{(s)}_j$について詳細釣り合い条件を満たすという．
+	\end{definition}
+\end{kotak}
+
+詳細釣り合い条件を満たしているとき，
+\begin{align}
+    \sum_{k=1}^{\Omega} T_{j,k}p_k^{(s)}
+    &=T_{j,j}p_k^{(s)} + \sum_{k(\neq j)} T_{j,k}p_k^{(s)}\nn[10pt]
+    &=T_{j,j}p_k^{(s)} + \sum_{k(\neq j)} T_{k,j}p_j^{(s)}\nn[10pt]
+    &=\left(\sum_{k}^{\Omega} T_{k,j}\right)p_j^{(s)}=p_j^{(s)}
+\end{align}
+が成り立つ．ここで，2つ目の等号で詳細釣り合い条件を使った．すなわち，
+\begin{equation}
+    T\bm{p}^{(s)}=\bm{p}^{(s)}
+\end{equation}
+を得る．逆に$T\bm{p}^{(s)}=\bm{p}^{(s)}$であるから詳細釣り合い条件が成り立つとは限らない．つまり，詳細釣り合い条件は$\bm{p}^{(s)}$が定常分布になるための十分条件であることがわかる．一般に，
+\begin{align}
+    T\bm{p}^{(s)}&=\bm{p}^{(s)}\\[10pt]
+    \sum_{k=1}^{\Omega}T_{k}p^{(s)}_k&=p^{(s)}_k
+\end{align}
+をつり合い条件 (balanced condition)と呼ぶ．定常分布を用意するための，$T$の決め方はいくらでも考えることができるのだが，その中の一つ (one of them)が詳細つり合い条件であるということに注意が必要である．詳細つり合い条件はとてもシンプルで扱いやすいアイデアなのだが，これを満たすモンテカルロ法は非常に遅いというのが弱点である．次では，目的の分布を用意するための数値計算手法であるマルコフ連鎖モンテカルロ法について解説を行う．また，具体的な実装法についても述べる．
+
+
+
+\subsection{マルコフ連鎖モンテカルロ法(Markov chain monte calro method, MCMC)}
+\paragraph{メトロポリス法 (metropolis method)}
+
+
+
+\section{Markov jump process}
+この節では，連続時間における離散状態に関するMarkov過程，すなわちMarkovジャンプ過程について考える．
+
+
+\subsection{定義}
+系は離散状態$j=1,\ldots,\Omega$を取る．系が時刻$t$に状態$j$を取る確率を$p_j(t)$とおく．\footnote{
+離散時間の場合は数列として，連続時間の場合は確率分布を時間$t$関数の形として表す．
+}
+確率$p_j(t)$は任意の時刻$t$で規格化条件を満たすとする
+\begin{equation}
+    \sum_{j=1}^{\Omega} p_j(t) = 1.
+\end{equation}
+時間$t$は連続に流れていき，系の状態は，ある瞬間に，ある状態から別の状態へと一瞬でジャンプするとする．このようなジャンプのおこる割合は，過去の記憶に影響されず(Markov性)，その瞬間の系の状態だけで決まるとする．
+
+ある時刻に系が状態$j$にいる場合を考える．ここである状態，遷移率(transition probability)と
+\begin{kotak}
+	\begin{definition}[遷移率 (transition rate) ]
+	ある時刻に系が状態$i$にいるとする．それから短い時間間隔$\Delta t$の間に系が別の状態$i$へ遷移している確率を次のように定める．
+	\begin{equation}
+	    \Delta t\ \omega_{i\to j} + \mathcal{O}((\Delta t)^2)
+	\end{equation}
+	このとき，単位時間あたりに状態$i$から$j$へ遷移する割合を$\omega_{i\to j}$と書き，これを遷移率(transition rate)と呼ぶ．
+	\end{definition}
+\end{kotak}
+\begin{kotak}
+	\begin{definition}[escaoe rate]
+	ある時刻に系が状態$j$にいるとする．このとき，状態$j$から$j$以外の別の状態へ逃げていく確率を次のように定義する：
+	\begin{equation}
+	    \lambda_j(t) = \sum_{k(\neq k)}\omega_{j\to k} \geq 0
+	\end{equation}
+	これをescape rateと呼ぶ．
+	\end{definition}
+\end{kotak}
+
+\subsection{Master equation}
+状態$j$の$t\sim t+\Delta t$の時間発展を考える．時刻$t+\Delta t$に状態$j$にいる確率は次のように記述される：
+\begin{align}
+    p_j(t+\Delta t) 
+    = -\Biggl\{
+    \Delta\ \lambda_j(t) + \mathcal{O}((\Delta t)^2)
+    \Biggr\}p_j(t)
+    +\sum_{k(\neq j)}
+    \Biggl\{
+    \Delta\ \omega_{k\to j}(t) + \mathcal{O}((\Delta t)^2)
+    \Biggr\}p_k(t)
+    +p_j(t)
+\end{align}
+右辺第一項$-\Bigl\{\Delta\ \lambda_j(t) + \mathcal{O}((\Delta t)^2)\Bigr\}p_j(t)$は状態$j$からescapeする確率を，第二項$\sum_{k(\neq j)}\Bigl\{\Delta\ \omega_{k\to j}(t) + \mathcal{O}((\Delta t)^2)
+\Bigr\}p_k(t)$は$k$から$j$に入ってくる確率を，第三項$p_j(t)$は$j$にそのままとどまっている確率を表す．
+
+この式を次のように変形する：
+\begin{align}
+    p_j(t+\Delta t) - p_j(t)
+    = -\Biggl\{
+    \Delta\ \lambda_j(t) + \mathcal{O}((\Delta t)^2)
+    \Biggr\}p_j(t)
+    +\sum_{k(\neq j)}
+    \Biggl\{
+    \Delta\ \omega_{k\to j}(t) + \mathcal{O}((\Delta t)^2)
+    \Biggr\}p_k(t)
+\end{align}
+そして両辺を$\Delta t$で割り，$\Delta t \to 0$の極限を取ると，次式を得る：
+\begin{align}\label{master_equation}
+    \frac{d}{dt}p_j(t)
+    = -\lambda_j(t)p_j(t)
+    +\sum_{k(\neq j)}\omega_{k\to j}(t) p_k(t).
+\end{align}
+
+ここで，遷移率行列 (transition rate matrix)を導入する．
+\begin{kotak}
+	\begin{definition}[遷移率行列 (transition rate matrix)]
+	遷移率行列$R(t)=(R_{j,k})_{j,k=1,\ldots,\Omega}$は遷移率$\omega_{k\to j}$とescape rate$\lambda_j$を用いて，次のように定義される：
+	\begin{align}
+	    R_{j,k}(t) &= \omega_{k\to j}(t) \geq 0\ \ \ (j\neq k)\\[10pt]
+	    R_{k,k}(t) &= -\lambda_{k}(t) \leq 0
+	\end{align}
+	また，遷移率行列は任意の$k$について次を満たす：
+	\begin{equation}
+	    \sum_{j=1}^{\Omega}R_{j,k} = 0
+	\end{equation}
+	これはescape rate$\lambda_k(t)$が$\lambda_k(t) = \sum_{j(\neq k)}\omega_{k\to j}(t)$と書けるから，$\sum_{j=1}^{\Omega}R_{j,k} =\sum_{j(\neq k)}R_{j,k} + R_{k,k} = 0$となることからわかる．
+	\end{definition}
+\end{kotak}
+遷移率行列$R(t)$を用いると，微分方程式\eqref{master_equation}は
+\begin{equation}
+    \frac{d}{dt}p_j(t)
+    = \sum_{k = 1}^{\Omega}R_{j,k}\ p_{k}(t)
+\end{equation}
+あるいは，
+\begin{equation}
+    \frac{d}{dt}\bm{p}(t)
+    = R(t) \bm{p}(t)
+\end{equation}
+と書ける．この式は物理ではマスター方程式 (master equation)と、数学ではコルモゴロフの先進方程式 (Kolmogorov's forward equation) と呼ぶ．
+\subsection{some basic properties}
+ここではMarkovジャンプ過程のいくつかの基本的な性質について述べる．
+\subsection{Master方程式の行列表現}
+
+\subsection{確率流の計算}
+
+\subsection{convergence theorem for stationary process（定常過程の収束定理）}
+
+\subsection{メトロポリス法}
