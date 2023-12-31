@@ -1,21 +1,12 @@
-\contentsline {part}{第I部\hspace {1zw}確率過程}{1}{part.1}%
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {section}{\numberline {2}Markov process with discrete state}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Markov chain}{2}{subsection.2.1}%
-\contentsline {paragraph}{基本的な定義}{2}{section*.2}%
-\contentsline {paragraph}{確率の保存則}{3}{section*.3}%
-\contentsline {section}{\numberline {3}マルコフ連鎖Markov chain}{3}{section.3}%
-\contentsline {paragraph}{単調性}{4}{section*.4}%
-\contentsline {paragraph}{経路の確率path prob}{4}{section*.5}%
-\contentsline {subsection}{\numberline {3.1}詳細釣り合いの条件(detailed balance condition)}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}マルコフ連鎖モンテカルロ法(Markov chain monte calro method, MCMC)}{6}{subsection.3.2}%
-\contentsline {paragraph}{メトロポリス法 (metropolis method)}{7}{section*.8}%
-\contentsline {subsection}{\numberline {3.3}具体的な実装方法}{8}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Markov jump process}{9}{section.4}%
-\contentsline {subsection}{\numberline {4.1}定義}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Master equation}{10}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}some basic properties}{11}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Master方程式の行列表現}{11}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}確率流の計算}{11}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}convergence theorem for stationary process（定常過程の収束定理）}{11}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}メトロポリス法}{11}{subsection.4.7}%
+\contentsline {part}{第I部\hspace {1zw}機械学習入門}{1}{part.1}%
+\contentsline {section}{\numberline {1}線形回帰モデル}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}線形回帰モデル}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}特徴量を入れた線形回帰モデル}{2}{subsection.1.2}%
+\contentsline {paragraph}{例1:}{2}{section*.3}%
+\contentsline {subsection}{\numberline {1.3}多次元の線形回帰モデル}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}具体的な実装・結果}{5}{subsection.1.4}%
+\contentsline {section}{\numberline {2}}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}行列のランク}{5}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}劣決定系：$n < N$}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}優決定系：$n > N$}{6}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}リッジ回帰}{6}{subsection.2.2}%

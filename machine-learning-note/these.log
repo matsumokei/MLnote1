@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2023.10.11)  12 OCT 2023 10:33
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2023.10.11)  31 DEC 2023 18:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -955,67 +955,63 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 1.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 4.
+(Font)              scaled to size 6.72699pt on input line 3.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 4.
+(Font)              scaled to size 4.805pt on input line 3.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 4.
+(Font)              scaled to size 6.72699pt on input line 3.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 4.805pt on input line 4.
+(Font)              scaled to size 4.805pt on input line 3.
 )
 \tf@toc=\write5
 \openout5 = `these.toc'.
 
- (./file/stochastic_process.tex
+ (./file/linear_regression.tex
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 1.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 1.
  [1
 
-] [2] [3] [4] [5]
+] [2] [3]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 137.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 137.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 137.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 137.
+
+
+LaTeX Warning: Reference `label' on page 4 undefined on input line 137.
+
+
+LaTeX Warning: Reference `label' on page 4 undefined on input line 137.
+
+[4] [5]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 175.
+(Font)              scaled to size 6.72699pt on input line 213.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 175.
- [6] [7]
-[8]
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 5.76599pt on input line 284.
-Package mdframed Info: Box was splittet wrong
- starting loop to iterate the splitting point
-(mdframed)              on input line 309.
- [9]
-Overfull \hbox (19.71674pt too wide) detected at line 323
-[]
- []
-
-
-Overfull \hbox (19.71674pt too wide) detected at line 337
-[]
- []
-
-
-Overfull \hbox (4.11983pt too wide) in paragraph at lines 348--349
-[]\JY1/mc/m/n/10 遷移率行列 $\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/1
-0 t\OT1/cmr/m/n/10 ) = (\OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 )[]$
- []
-
-[10]) (./these.bbl
+(Font)              scaled to size 5.76599pt on input line 219.
+ [6]) (./these.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [11] (./these.aux)
+) [7] [8] (./these.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `these.out' has not changed.
-(rerunfilecheck)             Checksum: 1CF25993AC2591B886BB030DDCA5868A;1270.
+(rerunfilecheck)             Checksum: 649F60F7E9561CFB58C0730A58EE1ECD;665.
  ) 
 Here is how much of TeX's memory you used:
- 23276 strings out of 478741
- 428715 string characters out of 5860981
- 714303 words of memory out of 5000000
- 41242 multiletter control sequences out of 15000+600000
- 521552 words of font info for 126 fonts, out of 8000000 for 9000
+ 23274 strings out of 478741
+ 428672 string characters out of 5860981
+ 720607 words of memory out of 5000000
+ 41240 multiletter control sequences out of 15000+600000
+ 521363 words of font info for 125 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 84i,19n,89p,716b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,16n,89p,493b,404s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on these.dvi (11 pages, 51100 bytes).
+Output written on these.dvi (8 pages, 37176 bytes).

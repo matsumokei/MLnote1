@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex these"] 1697035435 "these.aux" "these.bbl" "these" 1697074383
+["bibtex these"] 1704013414 "these.aux" "these.bbl" "these" 1704013417
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
   "myrefs.bib" 1696988412 884 cc25ce723594b546747fbb8cda0bc00e ""
-  "these.aux" 1697074382 3533 8b88d2435e5144928ffbafc0a4800c1f "latex"
+  "these.aux" 1704013416 2281 ee2a69290f49262b989737213023d50f "latex"
   (generated)
   "these.bbl"
   "these.blg"
-["dvipdf"] 1697074383 "these.dvi" "these.pdf" "these" 1697074383
-  "these.dvi" 1697074382 51100 1449cb2c8451c5d54d8352bff1c0c5a8 "latex"
+["dvipdf"] 1704013416 "these.dvi" "these.pdf" "these" 1704013417
+  "these.dvi" 1704013416 37176 41c67f1887d5370cb5942a407be24fbf "latex"
   (generated)
   "these.pdf"
-["latex"] 1697074382 "these.tex" "these.dvi" "these" 1697074383
+["latex"] 1704013415 "these.tex" "these.dvi" "these" 1704013417
   "/etc/texmf/web2c/texmf.cnf" 1696986304 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -205,12 +205,12 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/web2c/eptex/platex.fmt" 1696986400 2753775 16970a57f73f2c204091aa24c081ede8 ""
-  "file/stochastic_process.tex" 1696988413 20194 600332de46b389fc8d50d043adb53cc1 ""
-  "these.aux" 1697074382 3533 8b88d2435e5144928ffbafc0a4800c1f "latex"
-  "these.bbl" 1697035435 49 0eba253fc001332e731e8aba3f23127b "bibtex these"
-  "these.out" 1697074382 1270 1cf25993ac2591b886bb030ddca5868a "latex"
-  "these.tex" 1697074380 4433 6f91dbf214cb9a720105677d7132fac9 ""
-  "these.toc" 1697074382 1803 944301413bede6ca637e1fe192a787ab "latex"
+  "file/linear_regression.tex" 1704013350 13987 e600a22670964fb31405d6d74a183396 ""
+  "these.aux" 1704013416 2281 ee2a69290f49262b989737213023d50f "latex"
+  "these.bbl" 1704013415 49 0eba253fc001332e731e8aba3f23127b "bibtex these"
+  "these.out" 1704013416 665 649f60f7e9561cfb58c0730a58ee1ecd "latex"
+  "these.tex" 1703990414 4433 33ee907a72865f4034dbf93278823734 ""
+  "these.toc" 1704013416 1003 2f17d1f2120656198e03c46ea9cb9c1f "latex"
   (generated)
   "these.aux"
   "these.dvi"

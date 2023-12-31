@@ -115,4 +115,179 @@
     {}^t\hat{X}\hat{X}\vec{w}^\ast = {}^t\hat{X}\vec{y}
 \end{equation}
 を満たす．この方程式を正規方程式という．この方程式は${}^t\hat{X}\hat{X}$が正規行列，つまり逆行列が存在すれば$\vec{w}^\ast = ({}^t\hat{X}\hat{X})^{-1}\ {}^t\hat{X}\vec{y}$と解ける．正規方程式の導出を次に示す．
+
+\begin{align}
+    L(\vec{w}) &= 
+    \frac{1}{2}\|\vec{y}-{}^t\vec{w}\vec{x}\|^2_2
+    =\frac{1}{2}(\vec{y}-\hat{X}\vec{w})^t(\vec{y}-\hat{X}\vec{w})\nn\\[10pt]
+    &=\frac{1}{2}\left\{
+    \vec{y}^t\vec{y} - \vec{y}^t(\hat{X}\vec{w})
+    -(\hat{X}\vec{w})^t\vec{y} + \vec{w}^t\hat{X}^t\hat{X}\vec{w}\right\}\nn\\[10pt]
+    &=\frac{1}{2}\left\{
+    \vec{y}^t\vec{y} - 2(\hat{X}\vec{w})^t\vec{y} + \vec{w}^t\hat{X}^t\hat{X}\vec{w}\right\}
+    =\frac{1}{2}
+    \vec{y}^t\vec{y} - (\hat{X}\vec{w})^t\vec{y} + \frac{1}{2} \vec{w}^t\hat{X}^t\hat{X}\vec{w}
+\end{align}
+ここで，$(\hat{X}\vec{w})^t=\vec{w}^t\hat{X}^t$という関係を用いて，
+\begin{equation}
+    (\hat{X}\vec{w})^t\vec{y}=\vec{w}^t\hat{X}^t\vec{y}
+\end{equation}
+を用いた．
+
+ここで，内積と標準形に関する微分の公式\refeq{label}，\refeq{label}をそれぞれ使うと，
+\begin{equation}
+    \nabla_{\vec{w}}(\vec{y}^t\hat{X}\vec{w})
+    =\hat{X}^t\vec{y}
+\end{equation}
+
+\begin{equation}
+    \nabla_{\vec{w}}(\vec{w}^t\hat{X}^t\hat{X}\vec{w})
+    =\hat{X}^t\hat{X}\vec{w} + (\hat{X}^t\hat{X})^t\vec{w}
+    =2(\hat{X}^t\hat{X})^t\vec{w}
+\end{equation}
+ここで，$(\hat{X}^t\hat{X})^t=(\hat{X}^t\hat{X})^t$であり，また，このような行列をという．したがって，$L(\vec{w})$の$\vec{w}$方向についてのgradientは
+\begin{equation}
+    \nabla_{\vec{w}}L(\vec{w})
+    = -\hat{X}^t\vec{w} + (\hat{X}^t\hat{X})\vec{y}
+\end{equation}
+と求まる．よって，
+\begin{align}
+    \nabla_{\vec{w}}L(\vec{w})
+    &= -\hat{X}^t\vec{w} + (\hat{X}^t\hat{X})\vec{y} = 0\nn \\[5pt]
+    (\hat{X}^t\hat{X})\vec{y} &= \hat{X}^t\vec{w}
+\end{align}
+
+
 \subsection{具体的な実装・結果}
+
+
+
+
+\section{}
+最小ノルム解は$n$個のデータ$\vec{y}\in\mathbb{R}^{N}$, $\hat{X}\in\mathbb{R}^{n\times N}$，$N$個のパラメータ$\vec{w}$を用いて以下のように表された：
+\begin{equation}\label{eq:minimum-norm-solution}
+    \vec{w}^\ast = (\hat{X}^t\hat{X})^{-1}
+    \hat{X}^t\vec{y}
+\end{equation}
+ここでは，\eqref{eq:minimum-norm-solution}の意味について考察していく．ベクトル$\vec{y}$はデータを表しているため，問題を解くためのヒントを表している．また，方程式の個数$n$を表している．そして，パラメータ$\vec{w}$はパラメータの数，すなわち，モデルの複雑さを表している．
+方程式\eqref{eq:minimum-norm-solution}は連立方程式の解を表現していると言える．すなわち，\eqref{eq:minimum-norm-solution}から，自分のモデルをフィッティングさせるということは，連立方程式を解くことに帰着できることを意味している．
+
+実際，$n=N$，すなわち，データ数とパラメータ数が等しい場合，$\hat{X}$は正方行列となる．このとき，$\hat{X}$には逆行列が存在して，
+\begin{equation}
+    (\hat{X}^t\hat{X})^{-1} = \hat{X}^{-1}(\hat{X}^t)^{-1}
+\end{equation}
+より，
+\begin{equation}
+    \vec{y} = (\hat{X}^t\hat{X})^{-1}\hat{X}^t\vec{w} = \hat{X}^{-1}(\hat{X}^t)^{-1}\hat{X}^t\vec{w} = \hat{X}^{-1}\vec{w}
+\end{equation}
+を得る．これは，通常の$N$個の連立方程式を解く問題に帰着していることを意味している．
+
+逆行列は通常正方行列に対して定義される．しかし，$n\neq N$の場合，逆行列を定義できない．そこで，このような場合，行と列が異なる ($n\neq N$) 行列に対しては疑似逆行列が定義される．最小ノルム解\eqref{eq:minimum-norm-solution}のなかで，$(\hat{X}^t\hat{X})^{-1}
+\hat{X}^t$を疑似逆行列と呼ぶ．
+
+\subsection{行列のランク}
+行列のランクは特異値の数を意味する．以下のようなグラム行列の場合，固有値の数が特異値の数になる：
+\begin{equation}
+    {\underset{N\times n}{\underline{\hat{X}^t}}}
+    {\underset{n\times N}{\underline{\hat{X}}}} = \hat{U}\hat{\Lambda}\hat{U}^{-1}
+\end{equation}
+ここで，固有値は以下で表され，内側の次元$n$は固有値の数を表す：
+
+ここから，データの数$n$が少ない場合，固有値が$0$を取ってしまうことを意味する．未知数$N$の数に対して，方程式$n$の数が一致しなければ，連立方程式を解くことはできない．これは長方行列において，逆行列が存在しないことに対応する．
+
+\begin{equation}
+    \hat{X} = \hat{U}\hat{\Sigma}\hat{V}^T
+\end{equation}
+
+
+\subsubsection{劣決定系：$n < N$}
+$n < N$，すなわちデータ数が未知数に対して少ない場合，ランク落ち，劣決定系という．固有値が$N$よりも少ないため，$(\hat{X}^t\hat{X})^{-1}$が存在しない．そのため，再考を行う必要がある．
+
+
+\subsubsection{優決定系：$n > N$}
+$n > N$，すなわちデータ数が未知数に対して多い場合，フルランク，優決定系という．固有値が$N$よりも多いため，$(\hat{X}^t\hat{X})^{-1}$が存在する．このとき，疑似逆行列$(\hat{X}^t\hat{X})^{-1}
+\hat{X}^t$を計算でき，近似解を求めることができる．データがあるため，連立方程式を解くことができる．
+
+
+\subsection{リッジ回帰}
+逆行列が存在する，しないを議論することは連立方程式が解けるか，解けないかを議論している．逆行列が存在するようにすることを正則化という．ここでは正則化を行うための手法の一つであるリッジ回帰について学ぶ．\footnote{
+    データ拡張　データをある程度まねできるモデルからデータを生成し水増しすること
+    本当はうまくいっていないのではないかという意見がある
+    データの素性を知っている
+    データを吐き出せるくらいモデルがデータを知っている
+    じゃあ，拡張しなくてもいいのでは？
+}
+
+データ数が少ない，$n < N$の場合に用いられる正則化の一つがリッジ回帰である．このとき，グラム行列の固有値にはゼロ固有値が存在していた．リッジ回帰の基本的アイデアは，このゼロ固有値を取り得る対角成分に何かを埋めることである．
+
+ランク落ちが起こる別の場合，定数倍になっている場合，線形独立ではなくなって，ランク落ちが起こる場合がある．
+
+リッジ回帰はパラメータ空間で，二乗誤差がリッジ上の箇所で同じ解をもつために，解がユニークに定まらない場合に，
+
+現在，
+
+リッジ回帰を行うためにパラメータベクトルのノルム
+\begin{equation}
+    \vec{w}\|^2_2 = \vec{w}^t\vec{w}
+\end{equation}
+に係数$\lambda > 0$をかけて，二乗誤差に加えたものの最小化を考えてみる：
+\begin{equation}
+    L(\vec{w}) =
+    \min_{\vec{w}}
+    \left\{
+        \frac{1}{2}\|\vec{y}-{}^t\vec{w}\vec{x}\|^2_2 + \frac{\lambda}{2}\|\vec{w}\|^2_2
+    \right\}
+\end{equation}
+
+
+\begin{equation}
+    f(\vec{w}) = \frac{1}{2}\vec{w}^t\vec{w}
+    = \frac{1}{2}\sum_k w_k
+\end{equation}
+より，
+\begin{equation}
+    \nabla_{\vec{w}}f(\vec{w}) = \vec{w}
+\end{equation}
+
+したがって，
+\begin{align}
+    \nabla_{\vec{w}}L(\vec{w})
+    & = (\hat{X}^t\hat{X})\vec{w}^\ast 
+    - \hat{X}^t\vec{y}
+    +\lambda\vec{w}\nn\\[5pt]
+    & = -\hat{X}^t (\vec{y} - \hat{X}\vec{w}^\ast)
+    + +\lambda\vec{w} = 0
+\end{align}
+
+よって，
+\begin{align}
+    -\hat{X}^t (\vec{y} - \hat{X}\vec{w}^\ast)
+    + +\lambda\vec{w} &= 0\nn\\[5pt]
+    (\hat{X}^t\hat{X}
+     +\lambda\hat{I})\vec{w} &= \hat{X}^t \vec{y}
+\end{align}
+を得る．これを$\vec{w}$について解くと，
+\begin{equation}
+    \vec{w}^\ast = (\hat{X}^t\hat{X}
+    +\lambda\hat{I})^{-1}\hat{X}^t \vec{y}
+\end{equation}
+を得る．これがリッジ回帰の解である．$\hat{X}^t\hat{X}$は正則ではない項を意味し，$\lambda\hat{I}$は正則化する項を表している．
+
+リッジ回帰を使うことでパラメータ$\vec{w}$の絶対値を小さくすることができる．また，結果的に行列$\hat{X}^t\hat{X}$の対角成分に小さな$\alpha$を足すことで，ゼロ固有値をなくし，逆行列の計算を安定化させることができる．
+
+
+
+
+
+
+\paragraph*{$L2$ノルム}
+\begin{align}
+    \|\vec{a}\|^2_2 &= \vec{a}^t\vec{a} = a_1^2 + a_2^2 + \cdots\\[10pt]
+    \|\vec{a}\|_2 &= \sqrt{\vec{a}^t\vec{a}} = \sqrt{a_1^2 + a_2^2 + \cdots}
+\end{align}
+
+\paragraph*{内積の微分}
+
+\paragraph*{標準形の微分}
+
+

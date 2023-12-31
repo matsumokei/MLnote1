@@ -1,17 +1,10 @@
 %このファイルは日本語文字を含みます.
-\BOOKMARK [0][-]{part.1}{第I部 確率過程}{}% 1
-\BOOKMARK [1][-]{section.1}{Introduction}{part.1}% 2
-\BOOKMARK [1][-]{section.2}{Markov process with discrete state}{part.1}% 3
-\BOOKMARK [2][-]{subsection.2.1}{Markov chain}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{マルコフ連鎖Markov chain}{part.1}% 5
-\BOOKMARK [2][-]{subsection.3.1}{詳細釣り合いの条件\(detailed balance condition\)}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{マルコフ連鎖モンテカルロ法\(Markov chain monte calro method, MCMC\)}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{具体的な実装方法}{section.3}% 8
-\BOOKMARK [1][-]{section.4}{Markov jump process}{part.1}% 9
-\BOOKMARK [2][-]{subsection.4.1}{定義}{section.4}% 10
-\BOOKMARK [2][-]{subsection.4.2}{Master equation}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.3}{some basic properties}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.4}{Master方程式の行列表現}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.5}{確率流の計算}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.6}{convergence theorem for stationary process（定常過程の収束定理）}{section.4}% 15
-\BOOKMARK [2][-]{subsection.4.7}{メトロポリス法}{section.4}% 16
+\BOOKMARK [0][-]{part.1}{第I部 機械学習入門}{}% 1
+\BOOKMARK [1][-]{section.1}{線形回帰モデル}{part.1}% 2
+\BOOKMARK [2][-]{subsection.1.1}{線形回帰モデル}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{特徴量を入れた線形回帰モデル}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{多次元の線形回帰モデル}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.4}{具体的な実装・結果}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{}{part.1}% 7
+\BOOKMARK [2][-]{subsection.2.1}{行列のランク}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{リッジ回帰}{section.2}% 9
