@@ -1183,6 +1183,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss17.tfm
 OUTPUT these.dvi
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm
 INPUT ./these.bbl
 INPUT these.bbl
 INPUT ./these.bbl

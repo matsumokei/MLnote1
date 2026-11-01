@@ -275,10 +275,59 @@ $n > N$，すなわちデータ数が未知数に対して多い場合，フル�
 
 リッジ回帰を使うことでパラメータ$\vec{w}$の絶対値を小さくすることができる．また，結果的に行列$\hat{X}^t\hat{X}$の対角成分に小さな$\alpha$を足すことで，ゼロ固有値をなくし，逆行列の計算を安定化させることができる．
 
+線形代数は並列計算を行うための強力な数学
+
+
+\subsection{Lagrangeの未定乗数法}
+$\vec{w}$が不定なので円という条件を追加して，直線上の解を求める．
+これは，以下のように書ける：
+\begin{equation}
+    \min_{\vec{w}}\left\{
+        \frac{1}{2}\|\vec{w}\|^2_2
+        \right\}
+        \text{s.t.}\ 
+        \vec{y}=\hat{X}\vec{w}
+\end{equation}
+s.t.はsubject toの意味であり，$\vec{y}=\hat{X}\vec{w}$という条件の下で${1}{2}\|\vec{w}\|^2_2$を最小にするという意味を持つ．
+\begin{equation}
+    \min_{\vec{w}}\left\{
+        \frac{1}{2}\|\vec{w}\|^2_2
+        +\vec{\lambda}^t \cdot (\vec{y}-\hat{X}\vec{w})
+        \right\}
+\end{equation}
+$\nabla_{\vec{w}}$がゼロになるという条件から
+\begin{equation}
+     \vec{w} - \hat{X}^t\vec{\lambda} = \vec{0}\ 
+     \therefore \vec{w} = \hat{X}^t\vec{\lambda}
+\end{equation}
+よって，
+\begin{equation}
+    \vec{y} = \hat{X}\vec{w} = {\underset{n\times N}{\underline{\hat{X}}}}
+    {\underset{N\times n}{\underline{\hat{X}^t}}}\vec{\lambda}
+\end{equation}
+
+$\vec{\lambda}$について解いてやると，
+\begin{equation}
+    \vec{\lambda} = (\hat{X}\hat{X}^t)^{-1}\vec{y}
+\end{equation}
+を得る．ここで，$\hat{X}\hat{X}^t$には逆行列が存在する．なぜならば，いま，$N>n$であるから，固有値がゼロになることはないからである．
+
+この手法は，リッジ回帰と任意性 (パラメータ$\vec{\lambda}$を自分で決める操作)がないという点で大きな違いがある．
+
+まとめると以下のようになる：
+
+\begin{align}
+    n > N&\hspace{10pt} \vec{w} = (\hat{X}^t\hat{X})^{-1} \hat{X}^t \vec{y}\\[10pt]
+    n = N&\hspace{10pt} \vec{w} = \hat{X}^{-1} \vec{y}\\[10pt]
+    n < N&\hspace{10pt} \vec{w} = \hat{X}^t (\hat{X}\hat{X}^t)^{-1} \vec{y}
+\end{align}
 
 
 
-
+\paragraph{$L_1$ノルム}
+\begin{equation}
+    \|\vec{x}\|_1 = \sum_{i=1}|x_i|
+\end{equation}
 
 \paragraph*{$L2$ノルム}
 \begin{align}
@@ -291,3 +340,9 @@ $n > N$，すなわちデータ数が未知数に対して多い場合，フル�
 \paragraph*{標準形の微分}
 
 
+
+
+\section{LASSO回帰}
+
+Lipschitz連続
+$L$をLipschitz定数と呼び，関数の変化の激しさを表している．

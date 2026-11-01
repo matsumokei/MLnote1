@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2023.10.11)  12 OCT 2023 15:40
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2024.4.27)  27 OCT 2024 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -951,58 +951,58 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 124.
 (./these.toc
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 1.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 6.
+(Font)              scaled to size 6.72699pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 6.
+(Font)              scaled to size 4.805pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 6.
+(Font)              scaled to size 6.72699pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 4.805pt on input line 6.
- [1
-
-])
+(Font)              scaled to size 4.805pt on input line 2.
+)
 \tf@toc=\write5
 \openout5 = `these.toc'.
 
- (./file/probability.tex
+ (./file/poisson_process.tex
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 1.
+(Font)              scaled to size 11.53198pt on input line 2.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 5.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 5.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 1.
- [2] [3] [4] [5] [6])
-(./file/sampling_distribution.tex [7]
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 53.
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 53.
- [8] [9]
-Overfull \hbox (7.7559pt too wide) in paragraph at lines 128--129
-[]\JY1/mc/m/n/10 そして ， $\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 ([])\OML/cmm/m/it
-/10 ;  g\OT1/cmr/m/n/10 ([])\OML/cmm/m/it/10 ;  []  ;  g\OT1/cmr/m/n/10 ([])$ \
-JY1/mc/m/n/10 にそれぞれ対応する観測値 $\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 (\OML
-/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ;  g\OT1/cmr/m/n/10 (\OML/cmm
-/m/it/10 x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ;  []  ;  g\OT1/cmr/m/n/10 (\OML/
-cmm/m/it/10 x[]\OT1/cmr/m/n/10 )$
+(Font)              scaled to size 9.60999pt on input line 5.
+
+
+LaTeX Warning: Reference `' on page 1 undefined on input line 5.
+
+[1
+
+]
+Overfull \hbox (50.43993pt too wide) detected at line 45
+[]
  []
 
-[10] [11]) (./these.bbl
+[2] [3]) (./these.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [12] (./these.aux)
+) [4] [5] (./these.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `these.out' has not changed.
-(rerunfilecheck)             Checksum: CD68241BA4D800A2AE049511A9613AC6;1296.
+(rerunfilecheck)             Checksum: 8B8AB3B36B22D2ACB40F15B8C0D2FB60;384.
  ) 
 Here is how much of TeX's memory you used:
- 23279 strings out of 478741
- 428805 string characters out of 5860981
- 720190 words of memory out of 5000000
- 41242 multiletter control sequences out of 15000+600000
- 521363 words of font info for 125 fonts, out of 8000000 for 9000
+ 23268 strings out of 478741
+ 428580 string characters out of 5860982
+ 709409 words of memory out of 5000000
+ 41235 multiletter control sequences out of 15000+600000
+ 520398 words of font info for 120 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 84i,16n,89p,493b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,8n,89p,493b,464s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on these.dvi (12 pages, 53596 bytes).
+Output written on these.dvi (5 pages, 18264 bytes).

@@ -1,0 +1,150 @@
+\section{Poisson process}
+\subsection{ポアソン過程}
+観測開始時刻を$t=0$とおき、時間$(0,t]$間に事象が起こる回数を$N(t)$とすると、ある日の$N(t)$のグラフはのようなステップ関数となる。これは到着曲線と呼ばれている。$N(t)$は非負の整数値を取る。
+
+到着曲線$N(t)$は観測を行った日によって、関数の形状が異なる。つまり、別の日に観測を行えば\ref{}とは異なる別の到着曲線が得られる。
+
+\begin{definition}[ポアソン過程]
+    次の3つの性質を持つ確率変数の族$\{N(t)\}$をポアソン過程と呼ぶ。    
+\end{definition}
+
+$N(t)$は確率過程になっている。ここまだ詰められていない。
+
+この場合の$N(t)$のように、時間$(0,t]$間の何かの事象発生の個数を数えるような過程を計数過程 (counting process)と呼ぶ。
+
+\begin{theorem}
+    $\{N(t), t\geq0\}$がポアソン過程であるとする。$N(0)=0$とおくと、$N(t)$の分布は
+    \begin{equation}
+        P(N(t)=k) = \frac{(\lambda t)^k}{k!}e^{\lambda t},\ \ \ \ k=0,1,2,\ldots
+    \end{equation}
+    で与えられ、期待値と分散はそれぞれ
+    \begin{equation}
+        E
+    \end{equation}
+    となる。
+\end{theorem}
+
+
+$t+h$が経過中に事象が$k$回起こる確率を$P(N(t+h)=k)$とすると、$k\geq1$のとき、
+\begin{equation}\label{poisson_equation1}
+    P(N(t+h)=k) 
+    = \sum_{j=0}^{k}P(N(t)=k-j,\ N(t+h)-N(t)=j)
+\end{equation}
+となる。
+
+ポアソン過程の定義、独立増分性より、上式右辺の各項の確率は積で書ける。さらに、$h$が微小であるとすると、性質aより、微小時間$h$に2回以上事象が起こる$j\geq2$の確率は無視できるほど小さいので無視できる。微小時間にそう何度もイベントが発生することはないということ。
+したがって、\eqref{poisson_equation1}は
+\begin{align}
+    P(N(t+h)=k) 
+    &= P(N(t)=k,\ N(t+h)-N(t)=0)
+    + P(N(t)=k-1,\ N(t+h)-N(t)=1)\nn
+    &+ P(N(t)=k-2,\ N(t+h)-N(t)=2)+ \cdots \nn
+    &+ P(N(t)=0,\ N(t+h)-N(t)=k) \nn
+    &= P(N(t)=k,\ N(t+h)-N(t)=0)\nn
+    &+ P(N(t)=k-1,\ N(t+h)-N(t)=1) + \mathcal{O}(h)
+\end{align}
+
+ここで、時刻$t$の間に事象が$k$回起こる確率を$P_k(t)\equiv P(N(t)=k)$とおくと、上式は
+\begin{align}
+    P_k(t+h)
+    & = P_k(t)P(N(t+h)-N(t)=0) + P_{k-1}(t)P(N(t+h)-N(t)=1) + \mathcal{O}(h)\nn
+    & = P_k(t)(1-\lambda h) + P_{k-1}(t)\lambda h + \mathcal{O}(h)
+\end{align}
+ここで、性質b, cを使い、
+\begin{equation}
+    P(N(t+h)-N(t)=0) = 1-\lambda h
+    P(N(t+h)-N(t)=1) = \lambda h
+\end{equation}
+となることを使った。これを整理すると、
+\begin{equation}
+    \frac{P_k(t+h) - P_k(t)}{h}
+     = \lambda P_{k-1}(t) - \lambda P_k(t) + \mathcal{O}(h) / h
+\end{equation}
+となる。ここで、$h\to0$とすると、微分方程式
+\begin{equation}\label{poisson_master_equation}
+    \frac{dP_{k}(t)}{dt} = \lambda P_{k-1}(t) - \lambda P_k(t), k\geq1
+\end{equation}
+を得る。
+
+同様にして、$k=0$の場合は、
+\begin{equation}\label{poisson_master_equation0}
+    \frac{dP_{0}(t)}{dt} = -\lambda  P_0(t)
+\end{equation}
+となる。
+\eqref{poisson_master_equation}, \eqref{poisson_master_equation0}をポアソン過程の状態方程式、マスター方程式と呼ぶ。
+
+初期条件$P_0(t=0)=1$を満たす\eqref{poisson_master_equation0}の定常解は
+\begin{equation}
+    P_0(t) = e^{-\lambda t}
+\end{equation}
+である。これより、1回目の事象が時間$[t, t+h]$の間に起こる確率を$Q_1 h$とおくと、それは時間$t$までに事象が1回も起こらず、次の微小時間$h$の間に1回だけ起こる確率に等しいので、
+\begin{equation}
+    Q_1(t) h = P_0(t) \lambda h
+\end{equation}
+より、
+\begin{equation}
+    Q_1(t) = \lambda e^{-\lambda t}
+\end{equation}
+となる。これは指数分布となる。各事象は独立、かつ定常的な確率過程であるので、$Q_1(t)$は各事象間の待ち時間がtである確率ともいえる。つまり、ポアソン過程では各事象間の待ち時間分布は指数分布に従う。
+
+ポアソン過程で時間$t$の間に事象が$k\geq1$回起こる確率はポアソン分布に従う。
+
+結局$\lambda$って何かというと、decay rateみたいなもの、観測から決められるパラメータ。
+
+お店にやってくるお客の到着の仕方を観察する。
+
+
+
+
+\subsection{待ち行列の基本モデル}
+待ち行列をモデル化した場合、モデルを特徴づける要素がいくつか存在する。
+待ち行列モデルは対象の到着過程、サービス時間分布、サーバー数、待ち容量で特徴づけられる。
+以下のケンドール記法はこれらの要素をそれぞれ、記号で表し、待ち行列を特徴づける：
+\begin{equation}
+    A/S/c/K
+\end{equation}
+ここで、$A$は対象の到着を表す確率過程(到着過程)の種類、$S$はサービス時間の分布関数の種類、$c$はサーバー数、$K$は系内部で保留できる容量を表す。
+
+到着過程、すなわち到着分布は、平均到着率または、平均到着間隔で特徴づけられる。
+
+サービス時間の分布は、平均サービス率または、平均サービス時間で特徴づけられる。
+
+
+
+\subsection{待ち行列モデルの性能評価}
+
+待ち行列を評価するための指標について説明する。
+どれくらい利用されているか？
+単位時間にサーバーが利用されている割合、利用率$\rho\equiv\lambda/\mu$
+
+どれくらい待ちそうか？
+待ち行列の長さ
+
+
+待ち時間
+系内滞在時間は客が待ち行列システムに到着してから、サービスをを受け終わりシステムから退出するまでの時間で定義される。系内滞在時間$\hat{W}$は次式で定義される：
+\begin{equation}
+    \hat{W} = \hat{W}_{q} + \hat{B}
+\end{equation}
+ここで、$\hat{W}_{q}$は待ち時間であり、到着者が到着してからサービスを受けるまでの時間、$\hat{B}$はサービス時間であり、到着者自身がサービスを受ける時間を表す。
+
+確率分布の時間発展を正確に追うことは難しい。ここでは、定常状態における系の性質を調べる。
+
+もし、十分時間が経過した後にシステムが定常状態に落ち着くならば、定常状態におけるこれらの評価指標を解析することができる。つまり、システムが定常状態に収束し、$\hat{W}_{q}$や$\hat{B}$が十分時間が経過し、収束後の確率変数の極限であるとするならば、収束先の確率変数$\hat{W}_{q}$や$\hat{B}$と定常状態の分布関数を使い、これらの期待値を計算し評価できる。
+
+次に評価指標となるのは、待ち行列システムの状態である。待ち行列長や系内客数といった状態変数がある。
+
+
+
+\section{M/M/1モデル}
+M/M/1モデル、客の到着過程がポアソン過程、サービス時間分布が指数分布に従い、サーバーが1つであり、待ち容量に制限のない待ち行列モデルを考える。
+
+\begin{theorem}[M/M/1モデルにおける定常状態の存在]
+    到着率が$\lambda$、サービス率が$\mu$のM/M/1モデルにおいて、$\rho=\lambda/\mu < 1$のとき、初期状態によらず、定常状態$\pi_r\ (r=0,1,\ldots)$が存在し、
+    \begin{equation}
+        \lim_{t\to\infty}P_{j,r}(t)=\pi_r = (1-\rho)\rho^r
+    \end{equation}
+    である。
+\end{theorem}
+
+

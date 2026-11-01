@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex these"] 1697092822 "these.aux" "these.bbl" "these" 1697092824
+["bibtex these"] 1730014683 "these.aux" "these.bbl" "these" 1730014868
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
   "myrefs.bib" 1697092379 884 cc25ce723594b546747fbb8cda0bc00e ""
-  "these.aux" 1697092823 3042 acac6d2a1eb409b4e4761facf462d3df "latex"
+  "these.aux" 1730014868 1581 2df9b5282bec686597438f3112f01d66 "latex"
   (generated)
   "these.bbl"
   "these.blg"
-["dvipdf"] 1697092823 "these.dvi" "these.pdf" "these" 1697092824
-  "these.dvi" 1697092823 53596 16d8bdda1f0c8d2b57c6dab34fc19799 "latex"
+["dvipdf"] 1730014868 "these.dvi" "these.pdf" "these" 1730014868
+  "these.dvi" 1730014868 18264 d1522070b396306cd218afe70b0f0744 "latex"
   (generated)
   "these.pdf"
-["latex"] 1697092822 "these.tex" "these.dvi" "these" 1697092824
+["latex"] 1730014867 "these.tex" "these.dvi" "these" 1730014868
   "/etc/texmf/web2c/texmf.cnf" 1696986304 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -54,7 +54,6 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss12.tfm" 1136768653 1324 37b971caf729d7edd9cbb9f9b0ea76eb ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss17.tfm" 1136768653 1320 ed93d62c5f2c16343826001f03341dbc ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
@@ -204,14 +203,13 @@
   "/usr/share/texlive/texmf-dist/tex/platex/pxjahyper/pxjahyper.sty" 1623096304 45778 a49f011e10f5724dbca08e6537be63e6 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
-  "/var/lib/texmf/web2c/eptex/platex.fmt" 1696986400 2753775 16970a57f73f2c204091aa24c081ede8 ""
-  "file/probability.tex" 1697092379 8979 aed50f455dabcecc8e3ca5e5c6c396df ""
-  "file/sampling_distribution.tex" 1697092379 11116 e0576a156edfe58f3d02a92b84dd0120 ""
-  "these.aux" 1697092823 3042 acac6d2a1eb409b4e4761facf462d3df "latex"
-  "these.bbl" 1697092822 49 0eba253fc001332e731e8aba3f23127b "bibtex these"
-  "these.out" 1697092823 1296 cd68241ba4d800a2ae049511a9613ac6 "latex"
-  "these.tex" 1697092379 3909 6592bb8758b880a4e61e869a17086f6d ""
-  "these.toc" 1697092823 1504 8e72155b8ae3e3fc268711ad641ee1d1 "latex"
+  "/var/lib/texmf/web2c/eptex/platex.fmt" 1714229612 2752483 e51dd8f578314a35f689f3f7d8b423f4 ""
+  "file/poisson_process.tex" 1730014783 7653 02ceee825d5dac1fbf9e662a76fffcfe ""
+  "these.aux" 1730014868 1581 2df9b5282bec686597438f3112f01d66 "latex"
+  "these.bbl" 1730014683 49 0eba253fc001332e731e8aba3f23127b "bibtex these"
+  "these.out" 1730014868 384 8b8ab3b36b22d2acb40f15b8c0d2fb60 "latex"
+  "these.tex" 1723528336 3909 bb21f0a437d4942c794e6b795aa60037 ""
+  "these.toc" 1730014868 423 cee76187df8ef193cf11e8d1879fa467 "latex"
   (generated)
   "these.aux"
   "these.dvi"

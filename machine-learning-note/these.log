@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2023.10.11)  31 DEC 2023 18:03
+This is e-pTeX, Version 3.141592653-p3.9.1-210218-2.6 (utf8.euc) (TeX Live 2022/dev/Debian) (preloaded format=platex 2023.10.11)  4 JAN 2024 17:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -994,24 +994,27 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 213.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 5.76599pt on input line 219.
- [6]) (./these.bbl
+ [6] [7]
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 4.805pt on input line 288.
+ [8]) (./these.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [7] [8] (./these.aux)
+) [9] (./these.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `these.out' has not changed.
-(rerunfilecheck)             Checksum: 649F60F7E9561CFB58C0730A58EE1ECD;665.
+(rerunfilecheck)             Checksum: 81775FC8B339283E29C5F8B71EF91870;741.
  ) 
 Here is how much of TeX's memory you used:
  23274 strings out of 478741
  428672 string characters out of 5860981
- 720607 words of memory out of 5000000
+ 723678 words of memory out of 5000000
  41240 multiletter control sequences out of 15000+600000
- 521363 words of font info for 125 fonts, out of 8000000 for 9000
+ 521552 words of font info for 126 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 84i,16n,89p,493b,404s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,16n,89p,493b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on these.dvi (8 pages, 37176 bytes).
+Output written on these.dvi (9 pages, 41904 bytes).
